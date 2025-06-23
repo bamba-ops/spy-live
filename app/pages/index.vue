@@ -1,6 +1,8 @@
 <script setup lang="ts"></script>
 
 <template>
-  <h1>index</h1>
-  <Hero />
+  <div>
+    <h1>index</h1>
+    <Hero />
+  </div>
 </template>
