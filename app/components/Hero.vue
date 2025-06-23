@@ -1,142 +1,193 @@
 <template>
   <section
-    class="relative overflow-hidden min-h-screen flex items-center bg-gradient-to-tr from-pink-50 via-blue-50 to-teal-50 px-4 font-sans"
+    class="relative w-full min-h-screen flex items-center justify-center bg-gradient-to-tr from-pink-50 via-blue-50 to-teal-50 font-sans overflow-hidden"
   >
+    <!-- Fake Live Video/Image -->
     <div
-      class="max-w-3xl mx-auto w-full text-center py-16 flex flex-col items-center z-10"
+      class="relative w-[350px] h-[620px] md:w-[400px] md:h-[750px] bg-black rounded-2xl overflow-hidden shadow-2xl flex items-end"
     >
-      <!-- Logo -->
-      <div class="flex items-center justify-center mb-8">
-        <span
-          class="inline-flex items-center justify-center bg-pink-100 rounded-full w-16 h-16 shadow-sm"
-        >
-          <svg
-            class="h-9 w-9 text-pink-500"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <circle cx="11" cy="11" r="7" stroke="currentColor" />
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M21 21l-4.35-4.35"
-            />
-          </svg>
-        </span>
-      </div>
-      <!-- Punchline -->
-      <h1
-        class="text-4xl md:text-6xl font-bold text-gray-900 leading-tight mb-6 tracking-tight drop-shadow-xl"
-      >
-        Vends en live avant même d’avoir un site
-      </h1>
-      <p
-        class="text-lg md:text-2xl text-gray-700 max-w-2xl mx-auto mb-10 font-medium"
-      >
-        Teste le chat comme si tu étais en live TikTok et propose un produit !
-      </p>
-      <!-- Fake Live Chat -->
+      <img
+        src="/path-to-your-image.png"
+        alt="Live Demo"
+        class="absolute w-full h-full object-cover"
+      />
+
+      <!-- Overlay TikTok UI -->
       <div
-        class="w-full max-w-lg bg-white/80 rounded-2xl shadow-xl border border-gray-100 p-4 flex flex-col gap-2"
+        class="absolute inset-0 flex flex-col justify-between z-10 pointer-events-none"
       >
-        <div class="flex items-center gap-2 mb-2">
-          <div class="w-3 h-3 bg-pink-400 rounded-full animate-pulse"></div>
-          <div class="font-semibold text-pink-500">Live Demo</div>
-        </div>
-        <div class="flex flex-row gap-2 mb-2 justify-center">
-          <span
-            class="px-3 py-1 bg-gray-100 rounded-lg text-sm font-medium text-gray-600"
-            >#1 Tee-shirt</span
-          >
-          <span
-            class="px-3 py-1 bg-gray-100 rounded-lg text-sm font-medium text-gray-600"
-            >#2 Casquette</span
-          >
-          <span
-            class="px-3 py-1 bg-gray-100 rounded-lg text-sm font-medium text-gray-600"
-            >#3 Mug</span
-          >
-          <span
-            class="px-3 py-1 bg-gray-100 rounded-lg text-sm font-medium text-gray-600"
-            >#4 Tote-bag</span
-          >
-        </div>
-        <div
-          class="flex-1 overflow-y-auto h-56 md:h-64 mb-2 bg-white/70 rounded-xl border border-gray-100 p-3 flex flex-col-reverse gap-2 transition-all"
-        >
-          <!-- Messages (inversés pour effet chat) -->
-          <div v-for="(msg, i) in [...messages].reverse()" :key="i">
-            <div v-if="msg.from === 'user'" class="text-right mb-1">
-              <span
-                class="inline-block bg-blue-50 text-gray-700 px-4 py-2 rounded-2xl shadow text-base"
-              >
-                {{ msg.text }}
-              </span>
+        <!-- HEADER -->
+        <div class="flex items-center justify-between px-4 pt-3">
+          <!-- Left: user/likes -->
+          <div class="flex items-center gap-3">
+            <div
+              class="rounded-full border-2 border-pink-500 w-9 h-9 overflow-hidden"
+            >
+              <img
+                src="https://randomuser.me/api/portraits/men/1.jpg"
+                alt="avatar"
+                class="w-full h-full object-cover"
+              />
             </div>
-            <div v-else class="text-left mb-1">
-              <span
-                class="inline-block bg-pink-50 text-pink-700 px-4 py-2 rounded-2xl shadow text-base"
+            <div>
+              <div
+                class="flex items-center gap-1 text-white font-semibold text-xs"
               >
-                <span v-html="msg.text" />
-              </span>
+                Demondean...
+                <span
+                  class="ml-1 bg-white/20 text-xs px-1.5 py-0.5 rounded-full"
+                  >Follow</span
+                >
+              </div>
+              <div class="text-[11px] text-white/80">16.1K likes</div>
             </div>
           </div>
+          <!-- Right: viewers, close -->
+          <div class="flex items-center gap-2">
+            <div class="flex items-center">
+              <div
+                class="w-7 h-7 rounded-full bg-gray-800/70 flex items-center justify-center text-xs text-white"
+              >
+                👥
+              </div>
+              <span class="ml-1 text-white text-xs">855</span>
+            </div>
+            <button
+              class="ml-2 w-7 h-7 rounded-full bg-white/30 text-white text-xl flex items-center justify-center"
+            >
+              ×
+            </button>
+          </div>
         </div>
-        <form @submit.prevent="handleSend" class="flex gap-2 mt-1">
-          <input
-            v-model="input"
-            type="text"
-            required
-            maxlength="80"
-            placeholder="Écris un message (ex: Je veux le #2)"
-            class="flex-1 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-pink-400 bg-gray-50 text-base px-4 py-3 shadow-sm transition"
-          />
-          <button
-            type="submit"
-            class="bg-pink-500 hover:bg-pink-600 text-white font-semibold px-5 py-3 rounded-xl shadow transition active:scale-95"
+        <!-- Badges -->
+        <div class="absolute left-4 top-14 flex flex-col gap-2">
+          <div
+            class="flex items-center bg-black/50 px-2 py-1 rounded-full text-xs text-white gap-1"
           >
-            Envoyer
-          </button>
-        </form>
-      </div>
-      <!-- Social proof -->
-      <div
-        class="mt-8 flex items-center justify-center gap-2 text-gray-500 text-sm"
-      >
-        <svg
-          class="w-4 h-4 text-pink-400"
-          fill="currentColor"
-          viewBox="0 0 20 20"
+            <span>🔥 Weekly Ranking</span>
+          </div>
+          <div
+            class="flex items-center bg-black/50 px-2 py-1 rounded-full text-xs text-white gap-1"
+          >
+            <span>Explore →</span>
+          </div>
+        </div>
+        <!-- Right badges (optional) -->
+        <div class="absolute right-4 top-14 flex flex-col gap-2">
+          <div
+            class="flex items-center bg-white/70 px-2 py-1 rounded-full text-xs text-pink-600 gap-1 font-bold shadow"
+          >
+            Learn With Me
+          </div>
+        </div>
+        <!-- Chat (bottom left) -->
+        <div class="absolute left-2 bottom-28 flex flex-col gap-1 w-[80%]">
+          <transition-group name="fade" tag="div">
+            <div
+              v-for="(msg, i) in messages.slice(-6)"
+              :key="i"
+              :class="msg.from === 'user' ? 'text-pink-200' : 'text-white'"
+              class="text-[15px] font-medium drop-shadow"
+              v-html="msg.text"
+            />
+          </transition-group>
+        </div>
+        <!-- Input + boutons (bottom) -->
+        <div
+          class="absolute bottom-0 w-full flex items-center justify-between px-2 pb-2 gap-2 pointer-events-auto"
         >
-          <path
-            d="M10 15l-5.878 3.09 1.122-6.545L.488 6.91l6.562-.955L10 0l2.95 5.955 6.562.955-4.756 4.635 1.122 6.545z"
-          />
-        </svg>
-        <span>+150 créateurs nous font confiance</span>
+          <!-- Input -->
+          <form
+            @submit.prevent="handleSend"
+            class="flex-1 flex items-center gap-2"
+          >
+            <input
+              v-model="input"
+              type="text"
+              maxlength="80"
+              placeholder="Add comment…"
+              class="flex-1 bg-white/70 rounded-full px-4 py-2 text-[15px] outline-none placeholder-gray-500"
+            />
+            <button class="text-pink-600 font-bold px-2 text-lg" type="submit">
+              →
+            </button>
+          </form>
+          <!-- Floating buttons -->
+          <div class="flex items-center gap-2 pl-2">
+            <button
+              class="flex flex-col items-center text-xs text-pink-500 font-semibold"
+            >
+              <span
+                class="bg-pink-100 rounded-full w-9 h-9 flex items-center justify-center mb-1"
+                ><svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 20l9-5-9-5-9 5 9 5z" />
+                  <path d="M12 12V4m0 0l7 7-7 7-7-7 7-7z" /></svg
+              ></span>
+              Multi-guest
+            </button>
+            <button
+              class="flex flex-col items-center text-xs text-pink-500 font-semibold"
+            >
+              <span
+                class="bg-pink-100 rounded-full w-9 h-9 flex items-center justify-center mb-1"
+                >🌹</span
+              >
+              Rose
+            </button>
+            <button
+              class="flex flex-col items-center text-xs text-pink-500 font-semibold"
+            >
+              <span
+                class="bg-pink-100 rounded-full w-9 h-9 flex items-center justify-center mb-1"
+                >🎁</span
+              >
+              Gift
+            </button>
+            <button
+              class="flex flex-col items-center text-xs text-pink-500 font-semibold"
+            >
+              <span
+                class="bg-pink-100 rounded-full w-9 h-9 flex items-center justify-center mb-1"
+                >↗️</span
+              >
+              Share
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-    <!-- Bullles décoratives -->
-    <div
-      class="absolute -top-10 -left-24 w-72 h-72 bg-pink-100 rounded-full opacity-40 blur-2xl z-0"
-    ></div>
-    <div
-      class="absolute -bottom-20 -right-32 w-96 h-96 bg-blue-100 rounded-full opacity-40 blur-2xl z-0"
-    ></div>
   </section>
 </template>
 
 <script setup>
+import { ref } from "vue";
+
 const input = ref("");
 const messages = ref([
   {
     from: "bot",
-    text: "Bienvenue sur le live ! 👋 Demande un produit avec son numéro (#1, #2, #3 ou #4) pour voir comment ça marche.",
+    text: "<b>modérateur</b> : Bienvenue ! Tape #1, #2, #3 ou #4 pour tester un achat.",
+  },
+  {
+    from: "viewer",
+    text: "<span class='font-semibold'>kaithomas85</span> Kai Thomas<br><span class='text-xs'>I’m from Caerphilly</span>",
+  },
+  {
+    from: "viewer",
+    text: "<span class='font-semibold'>Bayleé</span><br><span class='text-xs'>I’m from Cwmbran</span>",
+  },
+  {
+    from: "viewer",
+    text: "<span class='font-semibold'>Kevin Foster</span><br><span class='text-xs'>Advice for skinny guys that can't bulk up</span>",
   },
 ]);
 
-// Produits simulés
 const products = [
   { id: 1, name: "Tee-shirt", link: "https://example.com/acheter-tshirt" },
   { id: 2, name: "Casquette", link: "https://example.com/acheter-casquette" },
@@ -146,11 +197,10 @@ const products = [
 
 function handleSend() {
   if (!input.value.trim()) return;
+  // Push user message
+  messages.value.push({ from: "user", text: `<b>toi</b> : ${input.value}` });
 
-  // Ajoute le message utilisateur
-  messages.value.push({ from: "user", text: input.value });
-
-  // Check si le message contient un numéro de produit
+  // Simulate product link if input contains #n
   let found = null;
   for (let p of products) {
     if (input.value.includes(`#${p.id}`) || input.value.includes(`${p.id}`)) {
@@ -161,29 +211,43 @@ function handleSend() {
 
   setTimeout(() => {
     if (found) {
-      // Affiche un faux lien de paiement dans le chat (style bouton/lien)
       messages.value.push({
         from: "bot",
-        text: `
-          <b>${found.name}</b> sélectionné&nbsp;!<br>
-          <a href="${found.link}" target="_blank" class="text-pink-600 underline font-semibold">➡️ Payer maintenant</a>
-        `,
+        text: `<b>modérateur</b> : <span class="text-pink-400">${found.name}</span> sélectionné ! <a href="${found.link}" target="_blank" class="underline text-pink-500 font-semibold">➡️ Payer maintenant</a>`,
       });
     } else {
       messages.value.push({
         from: "bot",
-        text: "Merci pour ton message ! Pour tester, choisis un produit avec #1, #2, #3 ou #4.",
+        text: "<b>modérateur</b> : Merci ! Pour tester : écris #1, #2, #3 ou #4.",
       });
     }
-  }, 800);
+  }, 700);
+
   input.value = "";
 }
 </script>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
-
 .font-sans {
   font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.4s;
+}
+.fade-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.fade-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-leave-from {
+  opacity: 1;
+}
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
