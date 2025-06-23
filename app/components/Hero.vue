@@ -1,38 +1,74 @@
+<script setup></script>
+
 <template>
-  <section class="bg-white text-gray-900">
-    <div
-      class="max-w-7xl mx-auto px-6 py-12 lg:py-24 flex flex-col-reverse lg:flex-row items-center"
-    >
-      <!-- Texte -->
-      <div
-        class="w-full lg:w-1/2 flex flex-col items-start text-center lg:text-left space-y-6"
-      >
-        <img src="/logo.svg" alt="MonSaaS" class="h-8 mb-4" />
-        <!-- logo discret -->
-        <h1
-          class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight"
-        >
-          Automatise les paiements pendant tes lives TikTok
-        </h1>
-        <p class="text-lg sm:text-xl text-gray-600 max-w-md">
-          Accepte les paiements en direct sans code, booste tes revenus et
-          concentre-toi sur ta communauté.
+  <div
+    class="max-w-md mx-auto rounded-2xl bg-white shadow-lg p-6 my-8 flex flex-col gap-5"
+  >
+    <!-- Logo & Title -->
+    <div class="flex items-center gap-3">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/0/09/TikTok_logo.svg"
+        alt="TikTok Live Logo"
+        class="w-12 h-12 rounded-lg shadow"
+      />
+      <div>
+        <h2 class="font-bold text-xl text-gray-900">
+          Automatise les paiements TikTok Live
+        </h2>
+        <p class="text-sm text-gray-500">
+          Par <span class="font-medium text-indigo-600">[Nom de ton SaaS]</span>
         </p>
-        <a
-          href="#demo"
-          class="inline-block px-8 py-4 bg-blue-600 text-white text-lg font-semibold rounded-md shadow hover:bg-blue-700 transition"
-        >
-          Essaie gratuitement
-        </a>
-      </div>
-      <!-- Visuel -->
-      <div class="w-full lg:w-1/2 mb-8 lg:mb-0 flex justify-center">
-        <img
-          src="/mockup.png"
-          alt="Mockup du dashboard SaaS"
-          class="w-full max-w-sm rounded-lg shadow-lg"
-        />
       </div>
     </div>
-  </section>
+    <!-- Main Feature -->
+    <div>
+      <p class="text-gray-700 leading-relaxed">
+        Simplifie ton processus de paiement pendant tes lives TikTok ! Connecte
+        ton compte, active l’automatisation, et laisse notre outil s’occuper du
+        reste : notifications, suivi, confirmations en temps réel.
+      </p>
+    </div>
+    <!-- Features List -->
+    <ul class="flex flex-col gap-2 mt-2">
+      <li class="flex items-center gap-2">
+        <span class="w-3 h-3 bg-green-400 rounded-full"></span>
+        Paiement instantané & sécurisé
+      </li>
+      <li class="flex items-center gap-2">
+        <span class="w-3 h-3 bg-blue-400 rounded-full"></span>
+        Notifications automatiques pendant le live
+      </li>
+      <li class="flex items-center gap-2">
+        <span class="w-3 h-3 bg-pink-400 rounded-full"></span>
+        Statistiques et dashboard intuitif
+      </li>
+    </ul>
+    <!-- CTA Button -->
+    <div>
+      <button
+        class="w-full py-3 px-4 rounded-xl bg-indigo-600 text-white font-semibold shadow hover:bg-indigo-700 transition"
+      >
+        Essayer gratuitement
+      </button>
+    </div>
+    <!-- Trust Badge (facultatif, type Airbnb) -->
+    <div
+      class="flex items-center justify-center mt-2 gap-1 text-gray-400 text-xs"
+    >
+      <svg
+        class="w-4 h-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M5 13l4 4L19 7"
+        />
+      </svg>
+      <span>Satisfait ou remboursé sous 14 jours</span>
+    </div>
+  </div>
 </template>
