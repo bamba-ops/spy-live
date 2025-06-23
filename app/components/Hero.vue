@@ -1,43 +1,63 @@
-<script setup></script>
-
 <template>
-  <section class="bg-white py-12 px-4 sm:py-20 sm:px-6 lg:px-8">
-    <div class="max-w-2xl mx-auto text-center flex flex-col items-center">
-      <span
-        class="inline-block bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full font-semibold mb-4 tracking-wide"
-      >
-        🚀 Pour créateurs TikTok Live
-      </span>
+  <section
+    class="min-h-screen flex items-center justify-center bg-gradient-to-tr from-pink-50 via-blue-50 to-teal-50 px-4 font-sans"
+  >
+    <div
+      class="w-full max-w-xl bg-white/90 rounded-3xl shadow-2xl border border-gray-100 p-8 md:p-14 flex flex-col items-center"
+    >
+      <!-- Logo style Airbnb, simple -->
+      <div class="mb-7 select-none">
+        <span
+          class="inline-flex items-center justify-center bg-pink-100 rounded-full w-14 h-14"
+        >
+          <svg
+            class="h-8 w-8 text-pink-500"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <circle cx="11" cy="11" r="7" stroke="currentColor" />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 21l-4.35-4.35"
+            />
+          </svg>
+        </span>
+      </div>
+      <!-- Punchline style ShipFast / Marc Lou -->
       <h1
-        class="text-3xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-6 leading-tight"
+        class="text-3xl md:text-4xl font-bold text-gray-800 mb-3 text-center tracking-tight leading-tight"
       >
         Vends en live avant même d’avoir un site
       </h1>
-      <p class="text-base sm:text-lg text-gray-600 mb-8 max-w-xl mx-auto">
-        Automatise ton processus de paiement sur TikTok Live et concentre-toi
-        sur tes ventes. Plus besoin de gérer les commandes à la main, on
-        s’occupe de tout.
-      </p>
-      <form
-        @submit.prevent
-        class="w-full flex flex-col sm:flex-row items-center gap-3 sm:gap-4 max-w-md mx-auto"
+      <p
+        class="text-gray-500 text-base md:text-lg mb-8 text-center max-w-xs mx-auto"
       >
-        <input
-          type="email"
-          required
-          placeholder="Ton email"
-          class="flex-1 w-full rounded-lg border border-gray-300 focus:border-black focus:ring-1 focus:ring-black px-4 py-3 text-base placeholder-gray-400 transition"
-        />
-        <button
-          type="submit"
-          class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold text-white bg-black hover:bg-gray-800 transition"
-        >
-          Rejoindre la liste
-        </button>
-      </form>
-      <div class="mt-6 text-xs text-gray-400">
-        ⚡️ Déjà +150 créateurs inscrits
+        Automatise tes paiements TikTok Live. Ne perds plus de ventes à cause de
+        la paperasse.
+      </p>
+      <!-- CTA Button -->
+      <button
+        class="w-full sm:w-auto px-8 py-4 bg-pink-500 hover:bg-pink-600 active:scale-95 text-white text-lg font-semibold rounded-xl shadow-md transition"
+      >
+        Rejoindre l'accès beta
+      </button>
+      <div class="mt-8 text-center text-gray-300 text-xs select-none w-full">
+        <span>
+          Made by
+          <span class="font-semibold text-pink-400">SpyLive</span>
+        </span>
       </div>
     </div>
   </section>
 </template>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
+.font-sans {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+</style>
