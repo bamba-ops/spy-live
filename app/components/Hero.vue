@@ -7,7 +7,7 @@
       class="relative w-[350px] h-[620px] md:w-[400px] md:h-[750px] bg-black rounded-2xl overflow-hidden shadow-2xl flex items-end"
     >
       <img
-        src="https://cdn.prod.website-files.com/65393b768d06ee4c16d24a33/66d9f300a5f0f810a72ceac5_65a7dc0dab893b750f8cc69e_live-button.png"
+        src="https://i.postimg.cc/655sXjjm/live2.png"
         alt="Live Demo"
         class="absolute w-full h-full object-cover"
       />
