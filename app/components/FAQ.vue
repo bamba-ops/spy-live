@@ -65,8 +65,6 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-
 const faqs = [
   {
     q: "Ai-je besoin d’un site pour vendre en live avec SpyLive ?",
