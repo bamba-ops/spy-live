@@ -6,72 +6,68 @@
       @click.self="close"
     >
       <div
-        class="bg-white rounded-3xl shadow-2xl w-full max-w-lg mx-4 p-0 relative animate-fadein flex flex-col max-h-[85vh] md:max-h-[90vh]"
+        class="bg-white/90 rounded-3xl shadow-2xl w-full max-w-lg mx-4 p-0 relative animate-fadein flex flex-col max-h-[85vh] md:max-h-[90vh] ring-2 ring-pink-100/40 backdrop-blur-sm"
       >
         <!-- Header -->
         <div
-          class="flex-shrink-0 relative px-6 pt-6 pb-2 bg-white rounded-t-3xl"
+          class="flex-shrink-0 relative px-6 pt-7 pb-3 bg-white rounded-t-3xl shadow-md"
         >
           <button
             @click="close"
-            class="absolute top-4 right-4 text-gray-400 hover:text-pink-500 transition text-2xl"
+            class="absolute top-4 right-4 text-gray-400 hover:text-pink-500 transition text-3xl font-bold"
           >
             ×
           </button>
           <h2
-            class="text-2xl md:text-3xl font-extrabold text-gray-900 mb-2 text-center"
+            class="text-2xl md:text-3xl font-extrabold text-gray-900 mb-1 text-center tracking-tight"
           >
-            Quelques questions pour mieux te connaître
+            🙌 Quelques questions pour toi
           </h2>
           <p class="text-gray-500 text-base mb-2 text-center">
-            Merci ! Ça nous aide à construire l’outil parfait pour toi.
+            On te prépare l’outil parfait, aide-nous à le personnaliser.
           </p>
         </div>
-        <!-- Scrollable content -->
+        <!-- Scrollable form -->
         <div class="overflow-y-auto px-6 pt-2 pb-6 flex-1 min-h-0">
           <form class="flex flex-col gap-6" @submit.prevent="submit">
-            <!-- ... toutes tes questions, identiques à la version précédente ... -->
             <!-- Rôle -->
             <div>
               <label class="block font-semibold mb-2 text-gray-700"
                 >Quel est ton rôle&nbsp;?</label
               >
               <div class="flex flex-col gap-2">
-                <label class="flex items-center gap-2 cursor-pointer">
+                <label
+                  v-for="option in roles"
+                  :key="option"
+                  class="flex items-center gap-2 cursor-pointer"
+                >
                   <input
                     type="radio"
                     v-model="form.role"
-                    value="Entrepreneur/e-com"
+                    :value="option"
                     class="accent-pink-500"
                   />
-                  Entrepreneur/e-com (marque propre)
+                  {{ option }}
                 </label>
                 <label class="flex items-center gap-2 cursor-pointer">
                   <input
                     type="radio"
                     v-model="form.role"
-                    value="Revendeur/dropshipping"
+                    value="Autre"
                     class="accent-pink-500"
                   />
-                  Revendeur/dropshipping
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    v-model="form.role"
-                    value="Créateur de contenu"
-                    class="accent-pink-500"
-                  />
-                  Créateur de contenu (influenceur)
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    v-model="form.role"
-                    value="Hobby"
-                    class="accent-pink-500"
-                  />
-                  Hobby / Loisir
+                  Autre
+                  <transition name="fadein-scale">
+                    <input
+                      v-if="form.role === 'Autre'"
+                      v-model="form.roleOther"
+                      type="text"
+                      maxlength="32"
+                      placeholder="Précise ton rôle"
+                      class="ml-2 px-3 py-1 rounded-lg border border-pink-100 focus:ring-2 focus:ring-pink-200 bg-pink-50 text-base shadow transition placeholder-pink-300 w-full max-w-[200px]"
+                      required
+                    />
+                  </transition>
                 </label>
               </div>
             </div>
@@ -81,50 +77,18 @@
                 >Catégorie principale que tu vends&nbsp;?</label
               >
               <div class="flex flex-col gap-2">
-                <label class="flex items-center gap-2 cursor-pointer">
+                <label
+                  v-for="option in sectors"
+                  :key="option"
+                  class="flex items-center gap-2 cursor-pointer"
+                >
                   <input
                     type="radio"
                     v-model="form.sector"
-                    value="Beauté & soins"
+                    :value="option"
                     class="accent-blue-500"
                   />
-                  Beauté & soins
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    v-model="form.sector"
-                    value="Mode & accessoires"
-                    class="accent-blue-500"
-                  />
-                  Mode & accessoires
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    v-model="form.sector"
-                    value="Maison/déco"
-                    class="accent-blue-500"
-                  />
-                  Maison/déco
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    v-model="form.sector"
-                    value="Tech/gadgets"
-                    class="accent-blue-500"
-                  />
-                  Tech/gadgets
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    v-model="form.sector"
-                    value="Produits digitaux"
-                    class="accent-blue-500"
-                  />
-                  Produits digitaux
+                  {{ option }}
                 </label>
                 <label class="flex items-center gap-2 cursor-pointer">
                   <input
@@ -134,6 +98,17 @@
                     class="accent-blue-500"
                   />
                   Autre
+                  <transition name="fadein-scale">
+                    <input
+                      v-if="form.sector === 'Autre'"
+                      v-model="form.sectorOther"
+                      type="text"
+                      maxlength="32"
+                      placeholder="Précise ton secteur"
+                      class="ml-2 px-3 py-1 rounded-lg border border-blue-100 focus:ring-2 focus:ring-blue-200 bg-blue-50 text-base shadow transition placeholder-blue-300 w-full max-w-[200px]"
+                      required
+                    />
+                  </transition>
                 </label>
               </div>
             </div>
@@ -143,41 +118,38 @@
                 >Audience moyenne par live&nbsp;?</label
               >
               <div class="flex flex-col sm:flex-row gap-2">
-                <label class="flex items-center gap-2 cursor-pointer">
+                <label
+                  v-for="option in audiences"
+                  :key="option"
+                  class="flex items-center gap-2 cursor-pointer"
+                >
                   <input
                     type="radio"
                     v-model="form.audience"
-                    value="<50"
+                    :value="option"
                     class="accent-teal-500"
                   />
-                  &lt; 50
+                  {{ option }}
                 </label>
                 <label class="flex items-center gap-2 cursor-pointer">
                   <input
                     type="radio"
                     v-model="form.audience"
-                    value="50-200"
+                    value="Autre"
                     class="accent-teal-500"
                   />
-                  50-200
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    v-model="form.audience"
-                    value="200-1000"
-                    class="accent-teal-500"
-                  />
-                  200-1 000
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    v-model="form.audience"
-                    value="1000+"
-                    class="accent-teal-500"
-                  />
-                  1 000+
+                  Autre
+                  <transition name="fadein-scale">
+                    <input
+                      v-if="form.audience === 'Autre'"
+                      v-model="form.audienceOther"
+                      type="text"
+                      maxlength="24"
+                      placeholder="Précise ton audience"
+                      class="ml-2 px-3 py-1 rounded-lg border border-teal-100 focus:ring-2 focus:ring-teal-200 bg-teal-50 text-base shadow transition placeholder-teal-300 w-full max-w-[140px]"
+                      required
+                    />
+                  </transition>
                 </label>
               </div>
             </div>
@@ -187,41 +159,38 @@
                 >Chiffre d’affaires moyen par live&nbsp;?</label
               >
               <div class="flex flex-col sm:flex-row gap-2">
-                <label class="flex items-center gap-2 cursor-pointer">
+                <label
+                  v-for="option in revenues"
+                  :key="option"
+                  class="flex items-center gap-2 cursor-pointer"
+                >
                   <input
                     type="radio"
                     v-model="form.revenue"
-                    value="0–50€"
+                    :value="option"
                     class="accent-pink-500"
                   />
-                  0–50€
+                  {{ option }}
                 </label>
                 <label class="flex items-center gap-2 cursor-pointer">
                   <input
                     type="radio"
                     v-model="form.revenue"
-                    value="50–200€"
+                    value="Autre"
                     class="accent-pink-500"
                   />
-                  50–200€
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    v-model="form.revenue"
-                    value="200–1000€"
-                    class="accent-pink-500"
-                  />
-                  200–1 000€
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    v-model="form.revenue"
-                    value="1000€+"
-                    class="accent-pink-500"
-                  />
-                  1 000€+
+                  Autre
+                  <transition name="fadein-scale">
+                    <input
+                      v-if="form.revenue === 'Autre'"
+                      v-model="form.revenueOther"
+                      type="text"
+                      maxlength="16"
+                      placeholder="Ex : 3500€/live"
+                      class="ml-2 px-3 py-1 rounded-lg border border-pink-100 focus:ring-2 focus:ring-pink-200 bg-pink-50 text-base shadow transition placeholder-pink-300 w-full max-w-[110px]"
+                      required
+                    />
+                  </transition>
                 </label>
               </div>
             </div>
@@ -231,94 +200,59 @@
                 >Comment tu encaisses tes clients aujourd’hui&nbsp;?</label
               >
               <div class="flex flex-col gap-2">
-                <label class="flex items-center gap-2 cursor-pointer">
+                <label
+                  v-for="option in processList"
+                  :key="option"
+                  class="flex items-center gap-2 cursor-pointer"
+                >
                   <input
                     type="radio"
                     v-model="form.process"
-                    value="Lien Stripe manuel"
+                    :value="option"
                     class="accent-pink-500"
                   />
-                  Je mets un lien Stripe manuel
+                  {{ option }}
                 </label>
                 <label class="flex items-center gap-2 cursor-pointer">
                   <input
                     type="radio"
                     v-model="form.process"
-                    value="DM client"
+                    value="Autre"
                     class="accent-pink-500"
                   />
-                  Je DM chaque client
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    v-model="form.process"
-                    value="Shopify Live"
-                    class="accent-pink-500"
-                  />
-                  J’utilise Shopify Live
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    v-model="form.process"
-                    value="Aucun"
-                    class="accent-pink-500"
-                  />
-                  Aucun pour l’instant
+                  Autre
+                  <transition name="fadein-scale">
+                    <input
+                      v-if="form.process === 'Autre'"
+                      v-model="form.processOther"
+                      type="text"
+                      maxlength="32"
+                      placeholder="Précise ta méthode"
+                      class="ml-2 px-3 py-1 rounded-lg border border-pink-100 focus:ring-2 focus:ring-pink-200 bg-pink-50 text-base shadow transition placeholder-pink-300 w-full max-w-[180px]"
+                      required
+                    />
+                  </transition>
                 </label>
               </div>
             </div>
-            <!-- Découverte (NEW) -->
+            <!-- Découverte -->
             <div>
               <label class="block font-semibold mb-2 text-gray-700"
                 >Où as-tu entendu parler de nous&nbsp;?</label
               >
               <div class="flex flex-col gap-2">
-                <label class="flex items-center gap-2 cursor-pointer">
+                <label
+                  v-for="option in discoveryList"
+                  :key="option"
+                  class="flex items-center gap-2 cursor-pointer"
+                >
                   <input
                     type="radio"
                     v-model="form.discovery"
-                    value="TikTok"
+                    :value="option"
                     class="accent-blue-500"
                   />
-                  TikTok
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    v-model="form.discovery"
-                    value="Instagram"
-                    class="accent-blue-500"
-                  />
-                  Instagram
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    v-model="form.discovery"
-                    value="Google"
-                    class="accent-blue-500"
-                  />
-                  Google
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    v-model="form.discovery"
-                    value="Bouche à oreille"
-                    class="accent-blue-500"
-                  />
-                  Bouche à oreille
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    v-model="form.discovery"
-                    value="Ami/Collègue"
-                    class="accent-blue-500"
-                  />
-                  Ami/Collègue
+                  {{ option }}
                 </label>
                 <label class="flex items-center gap-2 cursor-pointer">
                   <input
@@ -328,6 +262,17 @@
                     class="accent-blue-500"
                   />
                   Autre
+                  <transition name="fadein-scale">
+                    <input
+                      v-if="form.discovery === 'Autre'"
+                      v-model="form.discoveryOther"
+                      type="text"
+                      maxlength="40"
+                      placeholder="Où ?"
+                      class="ml-2 px-3 py-1 rounded-lg border border-blue-100 focus:ring-2 focus:ring-blue-200 bg-blue-50 text-base shadow transition placeholder-blue-300 w-full max-w-[180px]"
+                      required
+                    />
+                  </transition>
                 </label>
               </div>
             </div>
@@ -346,7 +291,7 @@
             </div>
             <!-- Beta testeur -->
             <label
-              class="flex items-center gap-2 cursor-pointer select-none text-gray-600"
+              class="flex items-center gap-2 cursor-pointer select-none text-gray-600 mb-2"
             >
               <input
                 type="checkbox"
@@ -360,13 +305,14 @@
             <button
               type="submit"
               :disabled="loading"
-              class="mt-2 w-full flex items-center justify-center gap-2 bg-pink-500 hover:bg-pink-600 active:scale-95 text-white text-lg font-semibold py-3 rounded-xl shadow-lg transition disabled:opacity-60 disabled:cursor-not-allowed animate-bounceonce"
+              class="mt-2 w-full flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 via-blue-400 to-pink-400 hover:from-pink-600 hover:to-blue-400 active:scale-95 text-white text-lg font-semibold py-3 rounded-xl shadow-lg transition disabled:opacity-60 disabled:cursor-not-allowed animate-bounceonce"
             >
               {{
                 loading ? "Envoi..." : "Envoyer et finaliser mon inscription"
               }}
             </button>
           </form>
+          <!-- Feedback -->
           <transition name="fadein-scale">
             <div
               v-if="done"
@@ -404,13 +350,53 @@ const emit = defineEmits(["update:modelValue", "submitted"]);
 
 const close = () => emit("update:modelValue", false);
 
+const roles = [
+  "Entrepreneur/e-com (marque propre)",
+  "Revendeur/dropshipping",
+  "Créateur de contenu (influenceur)",
+  "Hobby / Loisir",
+];
+
+const sectors = [
+  "Beauté & soins",
+  "Mode & accessoires",
+  "Maison/déco",
+  "Tech/gadgets",
+  "Produits digitaux",
+];
+
+const audiences = ["< 50", "50-200", "200-1 000", "1 000+"];
+
+const revenues = ["0–50€", "50–200€", "200–1 000€", "1 000€+"];
+
+const processList = [
+  "Lien Stripe manuel",
+  "DM client",
+  "Shopify Live",
+  "Aucun pour l’instant",
+];
+
+const discoveryList = [
+  "TikTok",
+  "Instagram",
+  "Google",
+  "Bouche à oreille",
+  "Ami/Collègue",
+];
+
 const form = ref({
   role: "",
+  roleOther: "",
   sector: "",
+  sectorOther: "",
   audience: "",
+  audienceOther: "",
   revenue: "",
+  revenueOther: "",
   process: "",
+  processOther: "",
   discovery: "",
+  discoveryOther: "",
   challenge: "",
   beta: false,
 });
@@ -421,20 +407,36 @@ const done = ref(false);
 const submit = async () => {
   done.value = false;
   loading.value = true;
+
+  // Replace radio "Autre" value by the input if needed
+  const result = { ...form.value };
+  if (result.role === "Autre") result.role = result.roleOther;
+  if (result.sector === "Autre") result.sector = result.sectorOther;
+  if (result.audience === "Autre") result.audience = result.audienceOther;
+  if (result.revenue === "Autre") result.revenue = result.revenueOther;
+  if (result.process === "Autre") result.process = result.processOther;
+  if (result.discovery === "Autre") result.discovery = result.discoveryOther;
+
   await new Promise((r) => setTimeout(r, 900));
   done.value = true;
   loading.value = false;
-  emit("submitted", { ...form.value });
+  emit("submitted", result);
   setTimeout(() => {
     close();
     done.value = false;
     form.value = {
       role: "",
+      roleOther: "",
       sector: "",
+      sectorOther: "",
       audience: "",
+      audienceOther: "",
       revenue: "",
+      revenueOther: "",
       process: "",
+      processOther: "",
       discovery: "",
+      discoveryOther: "",
       challenge: "",
       beta: false,
     };
