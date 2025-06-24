@@ -19,19 +19,27 @@
         class="hidden md:flex items-center gap-8 text-gray-700 font-semibold text-base"
       >
         <li>
-          <a href="#features" class="hover:text-pink-500 transition"
+          <a
+            href="#features"
+            class="hover:text-pink-500 transition"
+            @click="scrollToFeatures"
             >Fonctionnalités</a
           >
         </li>
         <li>
-          <a href="#tarifs" class="hover:text-pink-500 transition">Tarifs</a>
+          <a
+            @click="scrollToFAQ"
+            href="#faq"
+            class="hover:text-pink-500 transition"
+            >FAQ</a
+          >
         </li>
-        <li><a href="#faq" class="hover:text-pink-500 transition">FAQ</a></li>
       </ul>
 
       <!-- CTA desktop -->
       <div class="hidden md:flex">
         <a
+          @click="scrollToLeads"
           href="#waitlist"
           class="bg-pink-500 hover:bg-pink-600 text-white font-bold px-6 py-2.5 rounded-xl shadow transition active:scale-95 text-base"
         >
@@ -135,6 +143,32 @@
 <script setup>
 import { ref } from "vue";
 const open = ref(false);
+const scrollToLeads = () => {
+  const el = document.getElementById("leads");
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  } else {
+    console.warn("Element #leads introuvable");
+  }
+};
+
+const scrollToFeatures = () => {
+  const el = document.getElementById("features");
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  } else {
+    console.warn("Element #leads introuvable");
+  }
+};
+
+const scrollToFAQ = () => {
+  const el = document.getElementById("FAQ");
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  } else {
+    console.warn("Element #leads introuvable");
+  }
+};
 </script>
 
 <style scoped>

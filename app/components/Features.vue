@@ -1,5 +1,5 @@
 <template>
-  <section class="py-16 md:py-24 bg-white/80 font-sans">
+  <section id="features" class="py-16 md:py-24 bg-white/80 font-sans">
     <div class="max-w-3xl mx-auto px-4">
       <!-- Heading principal -->
       <div class="mb-12 text-center">
