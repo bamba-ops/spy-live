@@ -8,16 +8,10 @@
       <!-- Logo -->
       <a href="/" class="flex items-center gap-2 shrink-0 select-none">
         <img
-          src="https://bywesphmqjoadfyrxbyu.supabase.co/storage/v1/object/public/test//spylive_logo.png"
-          alt="SpyLive Logo"
-          class="w-9 h-9 md:w-10 md:h-10 rounded-lg shadow-sm object-contain"
+        src="https://bywesphmqjoadfyrxbyu.supabase.co/storage/v1/object/public/test//spylive_logo.png"
+        alt="SpyLive Logo" class="w-28 h-10 object-contain"
+        <!-- taille modifiable, garde l'écriture lisible ! -->
         />
-        <span
-          class="font-bold text-lg md:text-xl text-gray-700 tracking-tight ml-1"
-        >
-          <span class="text-pink-500">Spy</span
-          ><span class="text-gray-700">Live</span>
-        </span>
       </a>
 
       <!-- Desktop links -->
@@ -73,13 +67,10 @@
           class="w-4/5 max-w-xs bg-white rounded-l-3xl shadow-2xl p-7 pt-6 flex flex-col gap-6 h-full"
         >
           <div class="flex items-center justify-between mb-2">
-            <span class="flex items-center gap-2">
-              <img src="/icon.png" class="w-7 h-7 rounded object-contain" />
-              <span class="font-bold text-lg text-gray-700">
-                <span class="text-pink-500">Spy</span
-                ><span class="text-gray-700">Live</span>
-              </span>
-            </span>
+            <img
+              src="https://bywesphmqjoadfyrxbyu.supabase.co/storage/v1/object/public/test//spylive_logo.png"
+              class="w-24 h-8 object-contain"
+            />
             <button
               @click="menuOpen = false"
               class="text-gray-400 hover:text-pink-500 text-2xl ml-4 p-1 rounded transition"
