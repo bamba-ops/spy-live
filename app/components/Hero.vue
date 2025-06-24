@@ -45,19 +45,6 @@
             <span class="tabular-nums"><CountTo :to="viewerCount" /></span>
           </span>
         </div>
-        <!-- Avatars viewers fake TikTok (ambiance) -->
-        <div class="flex items-center gap-[-8px] justify-center">
-          <img
-            v-for="(url, idx) in avatars"
-            :key="idx"
-            :src="url"
-            class="w-8 h-8 rounded-full border-2 border-white shadow -ml-2 first:ml-0 transition"
-            :alt="'viewer' + idx"
-          />
-          <span class="ml-2 text-xs text-gray-400 font-semibold"
-            >et d'autres regardent en direct</span
-          >
-        </div>
       </div>
       <!-- HEADLINE XXL -->
       <h1
