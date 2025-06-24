@@ -128,6 +128,7 @@
       class="absolute bottom-0 right-0 w-72 h-72 bg-blue-100 rounded-full opacity-30 blur-2xl pointer-events-none"
     ></div>
   </section>
+  <LeadsOnboardingModal v-model="showModal" />
 </template>
 
 <script setup>
@@ -138,6 +139,7 @@ const wantsBeta = ref(false);
 const loading = ref(false);
 const success = ref(false);
 const error = ref("");
+const showModal = ref(false);
 
 const submitForm = async () => {
   success.value = false;
@@ -157,6 +159,7 @@ const submitForm = async () => {
     error.value = "Erreur, réessaie.";
   }
   loading.value = false;
+  showModal.value = true;
 };
 </script>
 
