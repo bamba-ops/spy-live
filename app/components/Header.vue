@@ -8,9 +8,9 @@
       <!-- Logo -->
       <a href="/" class="flex items-center gap-2 shrink-0 select-none">
         <img
-        src="https://bywesphmqjoadfyrxbyu.supabase.co/storage/v1/object/public/test//spylive_logo.png"
-        alt="SpyLive Logo" class="w-28 h-10 object-contain"
-        <!-- taille modifiable, garde l'écriture lisible ! -->
+          src="https://bywesphmqjoadfyrxbyu.supabase.co/storage/v1/object/public/test//spylive_logo.png"
+          alt="SpyLive Logo"
+          class="w-28 h-10 object-contain"
         />
       </a>
 
