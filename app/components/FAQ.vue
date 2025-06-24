@@ -9,18 +9,20 @@
       <div
         v-for="(item, i) in faqs"
         :key="i"
-        class="bg-white/95 rounded-2xl shadow-md border border-pink-100/30 transition group"
+        class="bg-white/95 rounded-2xl shadow-md border border-pink-100/30 transition"
       >
         <button
-          class="w-full flex justify-between items-center px-6 py-5 focus:outline-none select-none text-left rounded-2xl transition group-open:bg-pink-50"
-          :class="opened === i
-            ? 'bg-pink-50/70 ring-2 ring-pink-100 border-pink-200 shadow-xl'
-            : 'bg-white/95 hover:bg-pink-50/50 focus:ring-2 focus:ring-pink-200'}"
+          class="w-full flex justify-between items-center px-6 py-5 focus:outline-none select-none text-left rounded-2xl transition"
+          :class="
+            opened === i
+              ? 'bg-pink-50/70 ring-2 ring-pink-100 border-pink-200 shadow-xl'
+              : 'bg-white/95 hover:bg-pink-50/50 focus:ring-2 focus:ring-pink-200'
+          "
           @click="opened = opened === i ? null : i"
-          aria-expanded="opened === i"
+          :aria-expanded="opened === i"
         >
           <span
-            class="font-semibold text-xl md:text-[1.25rem] text-gray-900 group-hover:text-pink-600 transition"
+            class="font-semibold text-xl md:text-[1.25rem] text-gray-900 transition"
           >
             {{ item.q }}
           </span>
@@ -29,7 +31,7 @@
             :class="
               opened === i
                 ? 'rotate-45 text-pink-500'
-                : 'rotate-0 text-gray-300 group-hover:text-pink-400'
+                : 'rotate-0 text-gray-300'
             "
           >
             <svg
@@ -65,6 +67,8 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
+
 const faqs = [
   {
     q: "Ai-je besoin d’un site pour vendre en live avec SpyLive ?",
