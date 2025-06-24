@@ -120,9 +120,8 @@
             </li>
           </ul>
           <a
-            href="#waitlist"
+            href="#leads"
             class="mt-7 bg-pink-500 hover:bg-pink-600 text-white font-bold px-6 py-3 rounded-xl shadow transition active:scale-95 text-center"
-            @click="scrollToLeads"
           >
             Accès beta
           </a>
