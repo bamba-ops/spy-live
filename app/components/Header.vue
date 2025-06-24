@@ -112,15 +112,7 @@
             </li>
             <li>
               <a
-                href="#tarifs"
-                @click="open = false"
-                class="hover:text-pink-500 transition"
-                >Tarifs</a
-              >
-            </li>
-            <li>
-              <a
-                href="#faq"
+                href="#FAQ"
                 @click="open = false"
                 class="hover:text-pink-500 transition"
                 >FAQ</a
@@ -130,7 +122,7 @@
           <a
             href="#waitlist"
             class="mt-7 bg-pink-500 hover:bg-pink-600 text-white font-bold px-6 py-3 rounded-xl shadow transition active:scale-95 text-center"
-            @click="open = false"
+            @click="scrollToLeads"
           >
             Accès beta
           </a>
@@ -141,7 +133,6 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 const open = ref(false);
 const scrollToLeads = () => {
   const el = document.getElementById("leads");
