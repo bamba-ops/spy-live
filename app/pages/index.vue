@@ -5,5 +5,6 @@
     <Hero />
     <Features />
     <Leads />
+    <FAQ />
   </div>
 </template>
