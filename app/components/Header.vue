@@ -1,118 +1,134 @@
 <template>
   <header
-    class="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-lg shadow-sm border-b border-pink-100/40"
+    class="w-full bg-white/90 shadow-sm fixed top-0 left-0 z-40 font-sans"
   >
     <nav
-      class="max-w-5xl mx-auto flex items-center justify-between px-4 py-2 md:py-3"
+      class="max-w-6xl mx-auto flex items-center justify-between px-4 md:px-8 h-16 md:h-20"
     >
-      <!-- LOGO -->
-      <a
-        href="/"
-        class="flex items-center gap-3 shrink-0 select-none py-1 md:py-0"
-      >
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2 select-none">
         <img
           src="https://bywesphmqjoadfyrxbyu.supabase.co/storage/v1/object/public/test//spylive_logo.png"
           alt="SpyLive Logo"
-          class="h-9 w-auto md:h-12 transition-all drop-shadow"
-          style="max-width: 180px"
+          class="w-10 h-10 md:w-12 md:h-12 object-contain"
         />
+        <span
+          class="text-xl md:text-2xl font-extrabold text-gray-900 tracking-tight hidden sm:inline"
+          >SpyLive</span
+        >
       </a>
 
-      <!-- Links (desktop only) -->
+      <!-- Center Nav Links -->
       <ul
-        class="hidden md:flex gap-7 items-center text-base font-medium text-gray-700"
+        class="hidden md:flex items-center gap-8 text-gray-700 font-semibold text-base"
       >
         <li>
           <a href="#features" class="hover:text-pink-500 transition"
             >Fonctionnalités</a
           >
         </li>
-        <li><a href="#faq" class="hover:text-pink-500 transition">FAQ</a></li>
         <li>
-          <a href="#leads" class="hover:text-pink-500 transition">Accès beta</a>
+          <a href="#tarifs" class="hover:text-pink-500 transition">Tarifs</a>
         </li>
+        <li><a href="#faq" class="hover:text-pink-500 transition">FAQ</a></li>
       </ul>
 
-      <!-- CTA (desktop only) -->
-      <div class="hidden md:block">
+      <!-- CTA desktop -->
+      <div class="hidden md:flex">
         <a
-          href="#leads"
-          class="bg-pink-500 hover:bg-pink-600 text-white font-semibold px-6 py-2.5 rounded-xl shadow-md transition active:scale-95 text-base"
+          href="#waitlist"
+          class="bg-pink-500 hover:bg-pink-600 text-white font-bold px-6 py-2.5 rounded-xl shadow transition active:scale-95 text-base"
         >
-          Rejoindre la beta
+          Accès beta
         </a>
       </div>
 
-      <!-- Burger (mobile only) -->
+      <!-- Burger (mobile) -->
       <button
-        class="md:hidden flex items-center justify-center rounded-lg p-2 border border-pink-100 shadow text-pink-500 hover:bg-pink-50 focus:ring-2 focus:ring-pink-300 transition"
-        @click="openMenu"
+        class="md:hidden flex items-center justify-center w-11 h-11 rounded-lg hover:bg-gray-100 transition"
+        @click="open = !open"
         aria-label="Ouvrir le menu"
       >
         <svg
-          class="w-7 h-7"
+          v-if="!open"
+          class="w-7 h-7 text-gray-700"
           fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
           viewBox="0 0 24 24"
         >
-          <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
+          <path
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4 7h16M4 12h16M4 17h16"
+          />
+        </svg>
+        <svg
+          v-else
+          class="w-7 h-7 text-gray-700"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18L18 6M6 6l12 12"
+          />
         </svg>
       </button>
     </nav>
 
-    <!-- FULLSCREEN MOBILE MENU -->
+    <!-- Mobile menu -->
     <transition name="fadein-scale">
       <div
-        v-if="menuOpen"
-        class="fixed inset-0 z-[100] flex flex-col bg-white/95 backdrop-blur-xl transition-all"
+        v-if="open"
+        class="fixed inset-0 bg-black/40 z-50 flex md:hidden"
+        @click.self="open = false"
       >
         <div
-          class="flex items-center justify-between px-5 pt-4 pb-2 border-b border-pink-100"
+          class="ml-auto w-5/6 max-w-xs h-full bg-white shadow-xl rounded-l-3xl p-6 flex flex-col gap-6 animate-fadein"
         >
-          <img
-            src="https://bywesphmqjoadfyrxbyu.supabase.co/storage/v1/object/public/test//spylive_logo.png"
-            alt="SpyLive Logo"
-            class="h-10 w-auto"
-            style="max-width: 150px"
-          />
           <button
-            @click="closeMenu"
-            class="text-gray-400 hover:text-pink-500 text-3xl px-1 py-1 rounded transition"
+            class="self-end text-gray-400 hover:text-pink-500 transition text-2xl mb-4"
+            @click="open = false"
             aria-label="Fermer le menu"
           >
-            &times;
+            ×
           </button>
-        </div>
-        <nav
-          class="flex-1 flex flex-col items-center justify-center gap-6 text-lg font-semibold"
-        >
+          <ul class="flex flex-col gap-5 text-lg font-semibold text-gray-700">
+            <li>
+              <a
+                href="#features"
+                @click="open = false"
+                class="hover:text-pink-500 transition"
+                >Fonctionnalités</a
+              >
+            </li>
+            <li>
+              <a
+                href="#tarifs"
+                @click="open = false"
+                class="hover:text-pink-500 transition"
+                >Tarifs</a
+              >
+            </li>
+            <li>
+              <a
+                href="#faq"
+                @click="open = false"
+                class="hover:text-pink-500 transition"
+                >FAQ</a
+              >
+            </li>
+          </ul>
           <a
-            href="#features"
-            @click="closeMenu"
-            class="block py-2 px-6 rounded-xl hover:bg-pink-50 hover:text-pink-500 transition w-full text-center"
-            >Fonctionnalités</a
+            href="#waitlist"
+            class="mt-7 bg-pink-500 hover:bg-pink-600 text-white font-bold px-6 py-3 rounded-xl shadow transition active:scale-95 text-center"
+            @click="open = false"
           >
-          <a
-            href="#faq"
-            @click="closeMenu"
-            class="block py-2 px-6 rounded-xl hover:bg-pink-50 hover:text-pink-500 transition w-full text-center"
-            >FAQ</a
-          >
-          <a
-            href="#leads"
-            @click="closeMenu"
-            class="block py-2 px-6 rounded-xl hover:bg-pink-50 hover:text-pink-500 transition w-full text-center"
-            >Accès beta</a
-          >
-        </nav>
-        <div class="p-6 pb-8">
-          <a
-            href="#leads"
-            @click="closeMenu"
-            class="block w-full bg-pink-500 hover:bg-pink-600 text-white text-lg font-semibold py-3 rounded-2xl text-center shadow-md transition active:scale-95"
-          >
-            🚀 Rejoindre la beta
+            Accès beta
           </a>
         </div>
       </div>
@@ -122,16 +138,15 @@
 
 <script setup>
 import { ref } from "vue";
-const menuOpen = ref(false);
-const openMenu = () => {
-  menuOpen.value = true;
-};
-const closeMenu = () => {
-  menuOpen.value = false;
-};
+const open = ref(false);
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+.font-sans {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+
 .fadein-scale-enter-active,
 .fadein-scale-leave-active {
   transition: all 0.33s cubic-bezier(0.68, -0.55, 0.27, 1.55);
@@ -139,6 +154,19 @@ const closeMenu = () => {
 .fadein-scale-enter-from,
 .fadein-scale-leave-to {
   opacity: 0;
-  transform: scale(1.03) translateY(-12px);
+  transform: scale(0.98) translateY(-16px);
+}
+.animate-fadein {
+  animation: fadein 0.36s cubic-bezier(0.48, 1.64, 0.38, 0.97) both;
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: translateY(-22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 </style>
