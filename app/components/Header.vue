@@ -8,7 +8,7 @@
       <!-- Logo -->
       <a href="/" class="flex items-center gap-2 shrink-0 select-none">
         <img
-          src="/icon.png"
+          src="https://bywesphmqjoadfyrxbyu.supabase.co/storage/v1/object/public/test//spylive_logo.png"
           alt="SpyLive Logo"
           class="w-9 h-9 md:w-10 md:h-10 rounded-lg shadow-sm object-contain"
         />
