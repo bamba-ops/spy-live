@@ -5,17 +5,13 @@
     <nav
       class="max-w-6xl mx-auto flex items-center justify-between px-4 md:px-8 h-16 md:h-20"
     >
-      <!-- Logo -->
-      <a href="/" class="flex items-center gap-2 select-none">
+      <!-- Logo seul, agrandi -->
+      <a href="/" class="flex items-center select-none">
         <img
           src="https://bywesphmqjoadfyrxbyu.supabase.co/storage/v1/object/public/test//spylive_logo.png"
           alt="SpyLive Logo"
-          class="w-10 h-10 md:w-12 md:h-12 object-contain"
+          class="w-14 h-14 md:w-20 md:h-20 object-contain"
         />
-        <span
-          class="text-xl md:text-2xl font-extrabold text-gray-900 tracking-tight hidden sm:inline"
-          >SpyLive</span
-        >
       </a>
 
       <!-- Center Nav Links -->
