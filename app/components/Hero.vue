@@ -92,8 +92,6 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-
 // Animation compteur viewers
 const viewerCount = ref(0);
 const targetCount = 1497;
@@ -101,6 +99,8 @@ const scrollToLeads = () => {
   const el = document.getElementById("leads");
   if (el) {
     el.scrollIntoView({ behavior: "smooth", block: "start" });
+  } else {
+    console.warn("Element #leads introuvable");
   }
 };
 

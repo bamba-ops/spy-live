@@ -1,5 +1,6 @@
 <template>
   <section
+    id="leads"
     class="min-h-screen flex items-center justify-center bg-gradient-to-tr from-pink-50 via-blue-50 to-teal-50 px-4 font-sans relative overflow-hidden"
   >
     <div
