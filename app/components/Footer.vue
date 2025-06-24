@@ -7,7 +7,7 @@
       <img
         src="https://bywesphmqjoadfyrxbyu.supabase.co/storage/v1/object/public/test//spylive_logo.png"
         alt="SpyLive Logo"
-        class="w-12 h-12 md:w-14 md:h-14 object-contain mb-1"
+        class="w-26 h-26 md:w-14 md:h-14 object-contain mb-1"
       />
       <!-- Slogan -->
       <p class="text-lg md:text-xl font-semibold text-gray-700 mb-2">
@@ -24,7 +24,7 @@
               >Fonctionnalités</a
             >
           </li>
-          <li><a href="#faq" class="hover:text-pink-500 transition">FAQ</a></li>
+          <li><a href="#FAQ" class="hover:text-pink-500 transition">FAQ</a></li>
           <li>
             <a
               href="mailto:admin@spygrocery.com"
