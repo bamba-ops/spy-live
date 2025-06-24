@@ -176,7 +176,6 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 const activeIndex = ref(null);
 </script>
 

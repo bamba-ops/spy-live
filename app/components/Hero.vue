@@ -10,7 +10,6 @@
         <span
           class="inline-flex items-center justify-center rounded-full w-14 h-14 bg-white/70 shadow"
         >
-          <!-- Icône "live" stylisée -->
           <svg viewBox="0 0 56 56" fill="none" class="h-10 w-10">
             <circle cx="28" cy="28" r="10" fill="#f43f5e" />
             <circle
@@ -52,22 +51,32 @@
       >
         🚀 Rejoindre l'accès beta
       </button>
-      <!-- Social proof -->
-      <div
-        class="mt-8 flex items-center justify-center gap-2 text-gray-400 text-base"
-      >
-        <span class="relative flex h-3 w-3">
+      <!-- Compteur social proof -->
+      <div class="mt-10 flex flex-col items-center gap-2 w-full">
+        <div
+          class="relative flex items-center gap-3 bg-white/90 border border-gray-100 shadow-lg rounded-2xl px-7 py-5 mx-auto"
+        >
+          <!-- Pastille live -->
+          <span class="relative flex h-4 w-4">
+            <span
+              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-500 opacity-80"
+            ></span>
+            <span
+              class="relative inline-flex rounded-full h-4 w-4 bg-pink-500 border-2 border-white"
+            ></span>
+          </span>
+          <!-- Chiffre animé -->
           <span
-            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"
-          ></span>
-          <span
-            class="relative inline-flex rounded-full h-3 w-3 bg-pink-500"
-          ></span>
-        </span>
-        <span>+150 créateurs utilisent déjà la solution</span>
+            class="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight tabular-nums"
+          >
+            +<span>{{ animatedCount }}</span>
+          </span>
+          <!-- Légende -->
+          <span class="text-base md:text-lg font-medium text-gray-500"
+            >créateurs utilisent déjà la solution</span
+          >
+        </div>
       </div>
-      <!-- Micro objection, optionnel -->
-      <!-- <div class="mt-2 text-xs text-gray-400">Accès gratuit, sans CB requise</div> -->
     </div>
     <!-- Déco bulle façon airbnb moderne -->
     <div
@@ -78,6 +87,31 @@
     ></div>
   </section>
 </template>
+
+<script setup>
+import { ref, onMounted } from "vue";
+
+// Compteur animé
+const start = 123; // valeur de départ
+const end = 153; // valeur de fin (ton social proof)
+const duration = 1800; // durée totale en ms (1.8 secondes)
+const animatedCount = ref(start);
+
+onMounted(() => {
+  let startTime = null;
+  function animateCount(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const progress = Math.min((timestamp - startTime) / duration, 1);
+    animatedCount.value = Math.floor(start + (end - start) * progress);
+    if (progress < 1) {
+      requestAnimationFrame(animateCount);
+    } else {
+      animatedCount.value = end;
+    }
+  }
+  requestAnimationFrame(animateCount);
+});
+</script>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
