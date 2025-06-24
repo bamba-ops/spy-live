@@ -1,25 +1,27 @@
 <template>
   <section class="max-w-2xl mx-auto w-full px-4 py-12">
     <h2
-      class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-8 text-center tracking-tight"
+      class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-10 text-center tracking-tight"
     >
       Questions fréquentes
     </h2>
-    <div class="space-y-4">
+    <div class="space-y-5">
       <div
         v-for="(item, i) in faqs"
         :key="i"
-        class="bg-white/90 rounded-2xl shadow-md transition"
+        class="bg-white/95 rounded-2xl shadow-md border border-pink-100/30 transition group"
       >
         <button
-          class="w-full flex justify-between items-center px-5 py-4 focus:outline-none select-none text-left rounded-2xl"
-          :class="
-            opened === i ? 'bg-pink-50/80' : 'bg-white/90 hover:bg-pink-50/60'
-          "
+          class="w-full flex justify-between items-center px-6 py-5 focus:outline-none select-none text-left rounded-2xl transition group-open:bg-pink-50"
+          :class="opened === i
+            ? 'bg-pink-50/70 ring-2 ring-pink-100 border-pink-200 shadow-xl'
+            : 'bg-white/95 hover:bg-pink-50/50 focus:ring-2 focus:ring-pink-200'}"
           @click="opened = opened === i ? null : i"
           aria-expanded="opened === i"
         >
-          <span class="font-semibold text-gray-800 text-lg">
+          <span
+            class="font-semibold text-xl md:text-[1.25rem] text-gray-900 group-hover:text-pink-600 transition"
+          >
             {{ item.q }}
           </span>
           <span
@@ -27,7 +29,7 @@
             :class="
               opened === i
                 ? 'rotate-45 text-pink-500'
-                : 'rotate-0 text-gray-400'
+                : 'rotate-0 text-gray-300 group-hover:text-pink-400'
             "
           >
             <svg
@@ -45,9 +47,16 @@
         <transition name="fadein-scale">
           <div
             v-if="opened === i"
-            class="px-5 pb-5 text-gray-600 text-base leading-relaxed border-t border-pink-100"
+            class="relative pl-5 pr-6 py-5 border-t border-pink-100 bg-pink-50/60 rounded-b-2xl"
           >
-            {{ item.a }}
+            <div
+              class="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-pink-300/60 to-blue-200/50 rounded-l"
+            ></div>
+            <div
+              class="text-gray-700 text-base md:text-[1.07rem] leading-relaxed md:leading-loose font-medium italic"
+            >
+              {{ item.a }}
+            </div>
           </div>
         </transition>
       </div>
@@ -56,7 +65,8 @@
 </template>
 
 <script setup>
-// Questions/réponses fictives adaptées à une landing SaaS TikTok Live :
+import { ref } from "vue";
+
 const faqs = [
   {
     q: "Ai-je besoin d’un site pour vendre en live avec SpyLive ?",
