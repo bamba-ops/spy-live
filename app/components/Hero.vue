@@ -61,6 +61,7 @@
       </p>
       <!-- Bouton principal, gros, responsive -->
       <button
+        @click="scrollToLeads"
         class="bg-pink-500 hover:bg-pink-600 text-white text-lg md:text-xl font-bold px-8 py-4 rounded-2xl shadow-xl transition active:scale-95 w-full max-w-xs"
       >
         🚀 Rejoindre l'accès beta
@@ -96,6 +97,12 @@ import { ref, onMounted } from "vue";
 // Animation compteur viewers
 const viewerCount = ref(0);
 const targetCount = 1497;
+const scrollToLeads = () => {
+  const el = document.getElementById("leads");
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+};
 
 onMounted(() => {
   let step = 0;

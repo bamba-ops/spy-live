@@ -4,7 +4,7 @@
   <div>
     <Hero />
     <Features />
-    <Leads />
+    <Leads id="leads" />
     <FAQ />
   </div>
 </template>
