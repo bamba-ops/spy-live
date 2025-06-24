@@ -4,5 +4,6 @@
   <div>
     <Hero />
     <Features />
+    <Leads />
   </div>
 </template>
