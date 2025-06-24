@@ -10,7 +10,7 @@
         <img
           src="https://bywesphmqjoadfyrxbyu.supabase.co/storage/v1/object/public/test//spylive_logo.png"
           alt="SpyLive Logo"
-          class="w-14 h-14 md:w-20 md:h-20 object-contain"
+          class="w-26 h-26 md:w-20 md:h-20 object-contain"
         />
       </a>
 
