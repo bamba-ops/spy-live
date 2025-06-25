@@ -341,6 +341,15 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
+import { createClient } from "@supabase/supabase-js";
+
+const config = useRuntimeConfig();
+const supabase = createClient(
+  config.public.supabaseUrl,
+  config.public.supabaseAnonKey
+);
+
 const props = defineProps({
   modelValue: Boolean,
 });
@@ -406,39 +415,66 @@ const submit = async () => {
   done.value = false;
   loading.value = true;
 
-  // Replace radio "Autre" value by the input if needed
-  const result = { ...form.value };
-  if (result.role === "Autre") result.role = result.roleOther;
-  if (result.sector === "Autre") result.sector = result.sectorOther;
-  if (result.audience === "Autre") result.audience = result.audienceOther;
-  if (result.revenue === "Autre") result.revenue = result.revenueOther;
-  if (result.process === "Autre") result.process = result.processOther;
-  if (result.discovery === "Autre") result.discovery = result.discoveryOther;
+  // Replace "Autre" value by input if needed
+  const toSend = {
+    ...form.value,
+    role: form.value.role === "Autre" ? form.value.roleOther : form.value.role,
+    sector:
+      form.value.sector === "Autre"
+        ? form.value.sectorOther
+        : form.value.sector,
+    audience:
+      form.value.audience === "Autre"
+        ? form.value.audienceOther
+        : form.value.audience,
+    revenue:
+      form.value.revenue === "Autre"
+        ? form.value.revenueOther
+        : form.value.revenue,
+    process:
+      form.value.process === "Autre"
+        ? form.value.processOther
+        : form.value.process,
+    discovery:
+      form.value.discovery === "Autre"
+        ? form.value.discoveryOther
+        : form.value.discovery,
+  };
 
-  await new Promise((r) => setTimeout(r, 900));
-  done.value = true;
+  try {
+    // Envoi vers Supabase (table "leads")
+    const { error: supaError } = await supabase.from("leads").insert([toSend]);
+    if (supaError) {
+      // Tu peux améliorer le feedback ici
+      alert("Erreur lors de l’envoi, réessaie.");
+    } else {
+      done.value = true;
+      emit("submitted", toSend);
+      setTimeout(() => {
+        close();
+        done.value = false;
+        form.value = {
+          role: "",
+          roleOther: "",
+          sector: "",
+          sectorOther: "",
+          audience: "",
+          audienceOther: "",
+          revenue: "",
+          revenueOther: "",
+          process: "",
+          processOther: "",
+          discovery: "",
+          discoveryOther: "",
+          challenge: "",
+          beta: false,
+        };
+      }, 1700);
+    }
+  } catch (e) {
+    alert("Erreur réseau.");
+  }
   loading.value = false;
-  emit("submitted", result);
-  setTimeout(() => {
-    close();
-    done.value = false;
-    form.value = {
-      role: "",
-      roleOther: "",
-      sector: "",
-      sectorOther: "",
-      audience: "",
-      audienceOther: "",
-      revenue: "",
-      revenueOther: "",
-      process: "",
-      processOther: "",
-      discovery: "",
-      discoveryOther: "",
-      challenge: "",
-      beta: false,
-    };
-  }, 1700);
 };
 </script>
 
