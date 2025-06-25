@@ -449,7 +449,7 @@ const submit = async () => {
       .insert([toSend])
       .eq("email", email);
     if (supaError) {
-      console.log(supaError);
+      console.log(supaError.message);
     } else {
       done.value = true;
       emit("submitted", toSend);
@@ -475,7 +475,7 @@ const submit = async () => {
       }, 1700);
     }
   } catch (e) {
-    console.log("Erreur réseau");
+    console.log(`Erreur réseau ${e}`);
   }
   loading.value = false;
 };
