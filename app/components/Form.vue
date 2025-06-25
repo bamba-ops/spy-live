@@ -471,7 +471,7 @@ const submit = async () => {
   try {
     // Envoi vers Supabase (table "leads")
     console.log(props.email);
-    const { data: error: supaError } = await supabase
+    const { data, error: supaError } = await supabase
       .from("leads")
       .update(toSend)
       .eq("email", props.email)
@@ -479,7 +479,7 @@ const submit = async () => {
     if (supaError) {
       console.log(supaError.message);
     } else {
-      console.log(data)
+      console.log(data);
       done.value = true;
       await nextTick();
       // Scroll vers le feedback
