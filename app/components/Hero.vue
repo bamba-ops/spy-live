@@ -78,7 +78,7 @@
             class="relative inline-flex rounded-full h-3 w-3 bg-pink-500"
           ></span>
         </span>
-        <span>+{{ leadsCount }} créateurs utilisent déjà la solution</span>
+        <span>{{ leadsCount + 7 }} créateurs utilisent déjà la solution</span>
       </div>
     </div>
     <!-- Déco bulle façon airbnb moderne -->
