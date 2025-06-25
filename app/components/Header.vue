@@ -49,6 +49,22 @@
 
       <!-- Burger (mobile) -->
       <button
+        class="md:hidden flex items-center justify-center rounded-lg p-2 border border-pink-100 shadow text-pink-500 hover:bg-pink-50 focus:ring-2 focus:ring-pink-300 transition"
+        @click="open = !open"
+        aria-label="Ouvrir le menu"
+      >
+        <svg
+          class="w-7 h-7"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+      <!--
+      <button
         class="md:hidden flex items-center justify-center w-11 h-11 rounded-lg hover:bg-gray-100 transition"
         @click="open = !open"
         aria-label="Ouvrir le menu"
@@ -82,6 +98,7 @@
           />
         </svg>
       </button>
+      -->
     </nav>
 
     <!-- Mobile menu -->
