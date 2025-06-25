@@ -433,7 +433,6 @@ const submit = async () => {
 
   // Replace "Autre" value by input if needed
   const toSend = {
-    email: props.email,
     role: form.value.role === "Autre" ? form.value.roleOther : form.value.role,
     role_other: form.value.role === "Autre" ? form.value.roleOther : "",
     sector:
