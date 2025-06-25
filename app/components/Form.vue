@@ -352,6 +352,7 @@ const supabase = createClient(
 
 const props = defineProps({
   modelValue: Boolean,
+  email: String,
 });
 const emit = defineEmits(["update:modelValue", "submitted"]);
 
@@ -443,10 +444,12 @@ const submit = async () => {
 
   try {
     // Envoi vers Supabase (table "leads")
-    const { error: supaError } = await supabase.from("leads").insert([toSend]);
+    const { error: supaError } = await supabase
+      .from("leads")
+      .insert([toSend])
+      .eq("email", email);
     if (supaError) {
-      // Tu peux améliorer le feedback ici
-      alert("Erreur lors de l’envoi, réessaie.");
+      console.log(supaError);
     } else {
       done.value = true;
       emit("submitted", toSend);
@@ -472,7 +475,7 @@ const submit = async () => {
       }, 1700);
     }
   } catch (e) {
-    alert("Erreur réseau.");
+    console.log("Erreur réseau");
   }
   loading.value = false;
 };
