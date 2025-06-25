@@ -469,20 +469,20 @@ const submit = async () => {
   };
 
   try {
-    // Met à jour la ligne du lead où l'email correspond
+    // Envoi vers Supabase (table "leads")
     const { error: supaError } = await supabase
       .from("leads")
-      .update(toSend) // <-- update au lieu de insert
-      .eq("email", props.email); // on cible l'email
-
+      .update([toSend])
+      .eq("email", props.email);
     if (supaError) {
       console.log(supaError.message);
     } else {
       done.value = true;
       await nextTick();
+      // Scroll vers le feedback
       if (feedback.value) {
         feedback.value.scrollIntoView({ behavior: "smooth", block: "center" });
-        feedback.value.focus();
+        feedback.value.focus(); // accessibilité
       }
       emit("submitted", toSend);
       setTimeout(() => {
@@ -508,7 +508,6 @@ const submit = async () => {
   } catch (e) {
     console.log(`Erreur réseau ${e}`);
   }
-
   loading.value = false;
 };
 </script>
