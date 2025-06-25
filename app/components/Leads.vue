@@ -34,20 +34,6 @@
           :disabled="loading"
         />
 
-        <label
-          class="flex items-center gap-3 cursor-pointer select-none text-gray-600 text-base"
-        >
-          <input
-            type="checkbox"
-            v-model="wantsBeta"
-            class="accent-pink-500 h-5 w-5 rounded border-gray-300 transition"
-          />
-          <span
-            >Je veux tester la
-            <span class="font-semibold text-pink-500">bêta</span></span
-          >
-        </label>
-
         <button
           type="submit"
           :disabled="loading || !email"
@@ -143,7 +129,6 @@ const supabase = createClient(
 );
 
 const email = ref("");
-const wantsBeta = ref(false);
 const loading = ref(false);
 const success = ref(false);
 const error = ref("");
@@ -162,7 +147,6 @@ const submitForm = async () => {
     const { error: supaError } = await supabase.from("leads").insert([
       {
         email: email.value,
-        beta: wantsBeta.value,
       },
     ]);
     if (supaError) {
@@ -175,7 +159,6 @@ const submitForm = async () => {
     } else {
       success.value = true;
       email.value = "";
-      wantsBeta.value = false;
       showModal.value = true;
     }
   } catch (e) {

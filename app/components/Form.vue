@@ -289,18 +289,7 @@
                 class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-300 bg-gray-50 text-base placeholder-gray-400 shadow-sm transition"
               />
             </div>
-            <!-- Beta testeur -->
-            <label
-              class="flex items-center gap-2 cursor-pointer select-none text-gray-600 mb-2"
-            >
-              <input
-                type="checkbox"
-                v-model="form.beta"
-                class="accent-blue-500 h-5 w-5 rounded border-gray-300"
-              />
-              Je veux être
-              <span class="font-semibold text-blue-500">bêta-testeur</span>
-            </label>
+
             <!-- Submit -->
             <button
               type="submit"
@@ -375,7 +364,7 @@ const sectors = [
 
 const audiences = ["< 50", "50-200", "200-1 000", "1 000+"];
 
-const revenues = ["0–50€", "50–200€", "200–1 000€", "1 000€+"];
+const revenues = ["0–50$", "50–200$", "200–1 000$", "1 000$+"];
 
 const processList = [
   "Lien Stripe manuel",
@@ -406,7 +395,6 @@ const form = ref({
   discovery: "",
   discoveryOther: "",
   challenge: "",
-  beta: false,
 });
 
 const loading = ref(false);
@@ -451,7 +439,6 @@ const submit = async () => {
     discovery_other:
       form.value.discovery === "Autre" ? form.value.discoveryOther : "",
     challenge: form.value.challenge,
-    beta: form.value.beta,
   };
 
   try {
@@ -482,7 +469,6 @@ const submit = async () => {
           discovery: "",
           discoveryOther: "",
           challenge: "",
-          beta: false,
         };
       }, 1700);
     }
