@@ -418,28 +418,40 @@ const submit = async () => {
 
   // Replace "Autre" value by input if needed
   const toSend = {
-    ...form.value,
+    email: props.email,
     role: form.value.role === "Autre" ? form.value.roleOther : form.value.role,
+    role_other: form.value.role === "Autre" ? form.value.roleOther : "",
     sector:
       form.value.sector === "Autre"
         ? form.value.sectorOther
         : form.value.sector,
+    sector_other: form.value.sector === "Autre" ? form.value.sectorOther : "",
     audience:
       form.value.audience === "Autre"
         ? form.value.audienceOther
         : form.value.audience,
+    audience_other:
+      form.value.audience === "Autre" ? form.value.audienceOther : "",
     revenue:
       form.value.revenue === "Autre"
         ? form.value.revenueOther
         : form.value.revenue,
+    revenue_other:
+      form.value.revenue === "Autre" ? form.value.revenueOther : "",
     process:
       form.value.process === "Autre"
         ? form.value.processOther
         : form.value.process,
+    process_other:
+      form.value.process === "Autre" ? form.value.processOther : "",
     discovery:
       form.value.discovery === "Autre"
         ? form.value.discoveryOther
         : form.value.discovery,
+    discovery_other:
+      form.value.discovery === "Autre" ? form.value.discoveryOther : "",
+    challenge: form.value.challenge,
+    beta: form.value.beta,
   };
 
   try {
