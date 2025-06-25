@@ -473,8 +473,9 @@ const submit = async () => {
     console.log(props.email);
     const { data, error: supaError } = await supabase
       .from("leads")
-      .update(toSend, { returning: "minimal" })
+      .update(toSend)
       .eq("email", props.email);
+      .select()
     if (supaError) {
       console.log(supaError.message);
     } else {
