@@ -42,7 +42,7 @@
               />
               <circle cx="12" cy="12" r="3.2" fill="#f43f5e" />
             </svg>
-            <span class="tabular-nums"><CountTo :to="viewerCount" /></span>
+            <span class="tabular-nums">{{ displayedCount }}</span>
           </span>
         </div>
       </div>
@@ -93,8 +93,15 @@
 
 <script setup>
 // Animation compteur viewers
+import { createClient } from "@supabase/supabase-js";
+const config = useRuntimeConfig();
+const supabase = createClient(
+  config.public.supabaseUrl,
+  config.public.supabaseAnonKey
+);
+
 const viewerCount = ref(0);
-const targetCount = 1497;
+const displayedCount = ref(0); // pour le CountTo animé
 const scrollToLeads = () => {
   const el = document.getElementById("leads");
   if (el) {
@@ -104,29 +111,30 @@ const scrollToLeads = () => {
   }
 };
 
-onMounted(() => {
+onMounted(async () => {
+  // Va chercher le nombre de leads réels
+  const { count, error } = await supabase
+    .from("leads")
+    .select("*", { count: "exact", head: true });
+  if (!error && typeof count === "number") {
+    viewerCount.value = count;
+  } else {
+    viewerCount.value = 150; // valeur par défaut si erreur
+  }
+  // Lance l'animation CountTo
+  displayedCount.value = 0;
   let step = 0;
+  const target = viewerCount.value;
   const interval = setInterval(() => {
-    if (viewerCount.value < targetCount) {
-      // Vitesse animée façon TikTok : plus rapide au début puis ralentit
-      step = Math.ceil((targetCount - viewerCount.value) / 10);
-      viewerCount.value += step;
+    if (displayedCount.value < target) {
+      step = Math.ceil((target - displayedCount.value) / 10);
+      displayedCount.value += step;
     } else {
-      viewerCount.value = targetCount;
+      displayedCount.value = target;
       clearInterval(interval);
     }
   }, 50);
 });
-
-// Avatars viewers ambiance TikTok
-const avatars = [
-  "https://randomuser.me/api/portraits/women/44.jpg",
-  "https://randomuser.me/api/portraits/men/36.jpg",
-  "https://randomuser.me/api/portraits/women/35.jpg",
-  "https://randomuser.me/api/portraits/men/20.jpg",
-  "https://randomuser.me/api/portraits/men/5.jpg",
-  "https://randomuser.me/api/portraits/women/13.jpg",
-];
 
 // Compteur animé (component minimal)
 const CountTo = {
