@@ -10,7 +10,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       // Can be overridden by NUXT_PUBLIC_HELLO_TEXT environment variable
-      helloText: 'Hello from the Edge 👋'
+      helloText: 'Hello from the Edge 👋',
+      supabaseUrl: process.env.SUPABASE_URL,
+      supabaseAnonKey: process.env.SUPABASE_ANON_KEY,
     }
   },
   // https://nuxt.com/docs/getting-started/upgrade#testing-nuxt-4

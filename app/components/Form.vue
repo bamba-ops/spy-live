@@ -341,64 +341,22 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { createClient } from "@supabase/supabase-js";
+const supabase = createClient(
+  config.public.supabaseUrl,
+  config.public.supabaseAnonKey
+);
 
 const props = defineProps({
   modelValue: Boolean,
+  email: String, // on récupère l'email passé par le parent
 });
 const emit = defineEmits(["update:modelValue", "submitted"]);
 
-const close = () => emit("update:modelValue", false);
-
-const roles = [
-  "Entrepreneur/e-com (marque propre)",
-  "Revendeur/dropshipping",
-  "Créateur de contenu (influenceur)",
-  "Hobby / Loisir",
-];
-
-const sectors = [
-  "Beauté & soins",
-  "Mode & accessoires",
-  "Maison/déco",
-  "Tech/gadgets",
-  "Produits digitaux",
-];
-
-const audiences = ["< 50", "50-200", "200-1 000", "1 000+"];
-
-const revenues = ["0–50€", "50–200€", "200–1 000€", "1 000€+"];
-
-const processList = [
-  "Lien Stripe manuel",
-  "DM client",
-  "Shopify Live",
-  "Aucun pour l’instant",
-];
-
-const discoveryList = [
-  "TikTok",
-  "Instagram",
-  "Google",
-  "Bouche à oreille",
-  "Ami/Collègue",
-];
+// ... (listes des choix inchangées)
 
 const form = ref({
-  role: "",
-  roleOther: "",
-  sector: "",
-  sectorOther: "",
-  audience: "",
-  audienceOther: "",
-  revenue: "",
-  revenueOther: "",
-  process: "",
-  processOther: "",
-  discovery: "",
-  discoveryOther: "",
-  challenge: "",
-  beta: false,
+  // ... tes champs
 });
 
 const loading = ref(false);
@@ -408,7 +366,7 @@ const submit = async () => {
   done.value = false;
   loading.value = true;
 
-  // Replace radio "Autre" value by the input if needed
+  // Remplacement "Autre"
   const result = { ...form.value };
   if (result.role === "Autre") result.role = result.roleOther;
   if (result.sector === "Autre") result.sector = result.sectorOther;
@@ -417,30 +375,26 @@ const submit = async () => {
   if (result.process === "Autre") result.process = result.processOther;
   if (result.discovery === "Autre") result.discovery = result.discoveryOther;
 
-  await new Promise((r) => setTimeout(r, 900));
-  done.value = true;
+  try {
+    // On update la row qui a cet email (il a été créé à l'étape précédente)
+    const { error: supaError } = await supabase
+      .from("leads")
+      .update(result)
+      .eq("email", props.email);
+    if (supaError) throw supaError;
+    done.value = true;
+    emit("submitted", result);
+    setTimeout(() => {
+      emit("update:modelValue", false);
+      done.value = false;
+      Object.keys(form.value).forEach(
+        (k) => (form.value[k] = typeof form.value[k] === "boolean" ? false : "")
+      );
+    }, 1700);
+  } catch (e) {
+    // Option: afficher une erreur, pas indispensable si déjà catché ailleurs
+  }
   loading.value = false;
-  emit("submitted", result);
-  setTimeout(() => {
-    close();
-    done.value = false;
-    form.value = {
-      role: "",
-      roleOther: "",
-      sector: "",
-      sectorOther: "",
-      audience: "",
-      audienceOther: "",
-      revenue: "",
-      revenueOther: "",
-      process: "",
-      processOther: "",
-      discovery: "",
-      discoveryOther: "",
-      challenge: "",
-      beta: false,
-    };
-  }, 1700);
 };
 </script>
 

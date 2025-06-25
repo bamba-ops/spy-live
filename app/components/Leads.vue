@@ -129,11 +129,15 @@
       class="absolute bottom-0 right-0 w-72 h-72 bg-blue-100 rounded-full opacity-30 blur-2xl pointer-events-none"
     ></div>
   </section>
-  <Form v-model="showModal" />
+  <Form @submitted="..." :email="savedEmail" v-model="showModal" />
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { createClient } from "@supabase/supabase-js";
+const supabase = createClient(
+  config.public.supabaseUrl,
+  config.public.supabaseAnonKey
+);
 
 const email = ref("");
 const wantsBeta = ref(false);
@@ -141,6 +145,7 @@ const loading = ref(false);
 const success = ref(false);
 const error = ref("");
 const showModal = ref(false);
+const savedEmail = ref(""); // Pour garder l'email jusqu'au modal
 
 const submitForm = async () => {
   success.value = false;
@@ -151,16 +156,21 @@ const submitForm = async () => {
   }
   loading.value = true;
   try {
-    // Place ton appel API ici (Airtable, Mailerlite etc)
-    await new Promise((r) => setTimeout(r, 1200));
+    // 1. Enregistre juste l'email + wantsBeta temporairement, le reste viendra dans le modal
+    const { error: supaError } = await supabase
+      .from("leads")
+      .insert([{ email: email.value, beta: wantsBeta.value }]);
+    if (supaError) throw supaError;
     success.value = true;
+    savedEmail.value = email.value;
     email.value = "";
     wantsBeta.value = false;
+    // 2. Ouvre le modal
+    showModal.value = true;
   } catch (e) {
     error.value = "Erreur, réessaie.";
   }
   loading.value = false;
-  showModal.value = true;
 };
 </script>
 
