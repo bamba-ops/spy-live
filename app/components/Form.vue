@@ -469,6 +469,7 @@ const submit = async () => {
 
   try {
     // Envoi vers Supabase (table "leads")
+    console.log(props.email);
     const { error: supaError } = await supabase
       .from("leads")
       .update(toSend)
