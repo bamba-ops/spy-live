@@ -355,12 +355,58 @@ const props = defineProps({
 });
 const emit = defineEmits(["update:modelValue", "submitted"]);
 
-// ... (listes des choix inchangées)
+const close = () => emit("update:modelValue", false);
+
+const roles = [
+  "Entrepreneur/e-com (marque propre)",
+  "Revendeur/dropshipping",
+  "Créateur de contenu (influenceur)",
+  "Hobby / Loisir",
+];
+
+const sectors = [
+  "Beauté & soins",
+  "Mode & accessoires",
+  "Maison/déco",
+  "Tech/gadgets",
+  "Produits digitaux",
+];
+
+const audiences = ["< 50", "50-200", "200-1 000", "1 000+"];
+
+const revenues = ["0–50€", "50–200€", "200–1 000€", "1 000€+"];
+
+const processList = [
+  "Lien Stripe manuel",
+  "DM client",
+  "Shopify Live",
+  "Aucun pour l’instant",
+];
+
+const discoveryList = [
+  "TikTok",
+  "Instagram",
+  "Google",
+  "Bouche à oreille",
+  "Ami/Collègue",
+];
 
 const form = ref({
-  // ... tes champs
+  role: "",
+  roleOther: "",
+  sector: "",
+  sectorOther: "",
+  audience: "",
+  audienceOther: "",
+  revenue: "",
+  revenueOther: "",
+  process: "",
+  processOther: "",
+  discovery: "",
+  discoveryOther: "",
+  challenge: "",
+  beta: false,
 });
-
 const loading = ref(false);
 const done = ref(false);
 
