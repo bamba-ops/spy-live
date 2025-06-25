@@ -11,8 +11,7 @@
       />
       <!-- Slogan -->
       <p class="text-lg md:text-xl font-semibold text-gray-700 mb-2">
-        <span class="text-pink-500">SpyLive</span> — Vendre n'a jamais été aussi
-        simple en live TikTok.
+        Vendre n'a jamais été aussi simple en live TikTok.
       </p>
       <!-- Liens -->
       <nav class="w-full">
