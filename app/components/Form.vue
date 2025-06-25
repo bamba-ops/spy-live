@@ -294,18 +294,44 @@
             <button
               type="submit"
               :disabled="loading"
-              class="mt-2 w-full flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 via-blue-400 to-pink-400 hover:from-pink-600 hover:to-blue-400 active:scale-95 text-white text-lg font-semibold py-3 rounded-xl shadow-lg transition disabled:opacity-60 disabled:cursor-not-allowed animate-bounceonce"
+              class="mt-2 w-full flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 via-blue-400 to-pink-400 hover:from-pink-600 hover:to-blue-400 active:scale-95 text-white text-lg font-semibold py-3 rounded-xl shadow-lg transition disabled:opacity-60 disabled:cursor-not-allowed relative animate-bounceonce"
             >
-              {{
-                loading ? "Envoi..." : "Envoyer et finaliser mon inscription"
-              }}
+              <span v-if="loading" class="absolute left-5 flex items-center">
+                <svg
+                  class="animate-spin h-6 w-6 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    class="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    stroke-width="4"
+                  />
+                  <path
+                    class="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v8z"
+                  />
+                </svg>
+              </span>
+              <span :class="loading ? 'opacity-40' : ''">
+                {{
+                  loading ? "Envoi..." : "Envoyer et finaliser mon inscription"
+                }}
+              </span>
             </button>
           </form>
-          <!-- Feedback -->
+
+          <!-- Feedback (toujours visible sans scroll auto) -->
           <transition name="fadein-scale">
             <div
               v-if="done"
+              ref="feedback"
               class="flex flex-col items-center justify-center gap-2 text-green-600 bg-green-50 border border-green-200 rounded-lg px-4 py-3 text-base font-medium shadow mt-6 text-center"
+              tabindex="-1"
             >
               <svg
                 class="w-7 h-7 mx-auto"
@@ -330,7 +356,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { nextTick, ref } from "vue";
 import { createClient } from "@supabase/supabase-js";
 
 const config = useRuntimeConfig();
@@ -338,6 +364,7 @@ const supabase = createClient(
   config.public.supabaseUrl,
   config.public.supabaseAnonKey
 );
+const feedback = ref(null);
 
 const props = defineProps({
   modelValue: Boolean,
@@ -451,6 +478,12 @@ const submit = async () => {
       console.log(supaError.message);
     } else {
       done.value = true;
+      await nextTick();
+      // Scroll vers le feedback
+      if (feedback.value) {
+        feedback.value.scrollIntoView({ behavior: "smooth", block: "center" });
+        feedback.value.focus(); // accessibilité
+      }
       emit("submitted", toSend);
       setTimeout(() => {
         close();
