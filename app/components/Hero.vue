@@ -42,7 +42,7 @@
               />
               <circle cx="12" cy="12" r="3.2" fill="#f43f5e" />
             </svg>
-            <span class="tabular-nums">{{ displayedCount }}</span>
+            <span class="tabular-nums"><CountTo :to="viewerCount" /></span>
           </span>
         </div>
       </div>
@@ -78,7 +78,7 @@
             class="relative inline-flex rounded-full h-3 w-3 bg-pink-500"
           ></span>
         </span>
-        <span>+150 créateurs utilisent déjà la solution</span>
+        <span>+{{ leadsCount }} créateurs utilisent déjà la solution</span>
       </div>
     </div>
     <!-- Déco bulle façon airbnb moderne -->
@@ -92,8 +92,9 @@
 </template>
 
 <script setup>
-// Animation compteur viewers
+import { ref, onMounted } from "vue";
 import { createClient } from "@supabase/supabase-js";
+
 const config = useRuntimeConfig();
 const supabase = createClient(
   config.public.supabaseUrl,
@@ -101,7 +102,9 @@ const supabase = createClient(
 );
 
 const viewerCount = ref(0);
-const displayedCount = ref(0); // pour le CountTo animé
+const leadsCount = ref(0);
+const targetCount = 1497; // valeur initiale pour animation viewers
+
 const scrollToLeads = () => {
   const el = document.getElementById("leads");
   if (el) {
@@ -111,29 +114,34 @@ const scrollToLeads = () => {
   }
 };
 
-onMounted(async () => {
-  // Va chercher le nombre de leads réels
-  const { count, error } = await supabase
-    .from("leads")
-    .select("*", { count: "exact", head: true });
-  if (!error && typeof count === "number") {
-    viewerCount.value = count;
-  } else {
-    viewerCount.value = 150; // valeur par défaut si erreur
-  }
-  // Lance l'animation CountTo
-  displayedCount.value = 0;
+// Animation compteur viewers (indépendant du nombre leads)
+onMounted(() => {
   let step = 0;
-  const target = viewerCount.value;
   const interval = setInterval(() => {
-    if (displayedCount.value < target) {
-      step = Math.ceil((target - displayedCount.value) / 10);
-      displayedCount.value += step;
+    if (viewerCount.value < targetCount) {
+      step = Math.ceil((targetCount - viewerCount.value) / 10);
+      viewerCount.value += step;
     } else {
-      displayedCount.value = target;
+      viewerCount.value = targetCount;
       clearInterval(interval);
     }
   }, 50);
+});
+
+// Récupération du nombre de leads en temps réel
+const fetchLeadsCount = async () => {
+  const { count, error } = await supabase
+    .from("leads")
+    .select("email", { count: "exact", head: true });
+  if (error) {
+    console.error("Erreur récupération leads count:", error);
+  } else {
+    leadsCount.value = count ?? 0;
+  }
+};
+
+onMounted(() => {
+  fetchLeadsCount();
 });
 
 // Compteur animé (component minimal)
