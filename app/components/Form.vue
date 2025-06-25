@@ -341,17 +341,8 @@
 </template>
 
 <script setup>
-import { createClient } from "@supabase/supabase-js";
-const config = useRuntimeConfig();
-
-const supabase = createClient(
-  config.public.supabaseUrl,
-  config.public.supabaseAnonKey
-);
-
 const props = defineProps({
   modelValue: Boolean,
-  email: String, // on récupère l'email passé par le parent
 });
 const emit = defineEmits(["update:modelValue", "submitted"]);
 
@@ -407,6 +398,7 @@ const form = ref({
   challenge: "",
   beta: false,
 });
+
 const loading = ref(false);
 const done = ref(false);
 
@@ -414,7 +406,7 @@ const submit = async () => {
   done.value = false;
   loading.value = true;
 
-  // Remplacement "Autre"
+  // Replace radio "Autre" value by the input if needed
   const result = { ...form.value };
   if (result.role === "Autre") result.role = result.roleOther;
   if (result.sector === "Autre") result.sector = result.sectorOther;
@@ -423,26 +415,30 @@ const submit = async () => {
   if (result.process === "Autre") result.process = result.processOther;
   if (result.discovery === "Autre") result.discovery = result.discoveryOther;
 
-  try {
-    // On update la row qui a cet email (il a été créé à l'étape précédente)
-    const { error: supaError } = await supabase
-      .from("leads")
-      .update(result)
-      .eq("email", props.email);
-    if (supaError) throw supaError;
-    done.value = true;
-    emit("submitted", result);
-    setTimeout(() => {
-      emit("update:modelValue", false);
-      done.value = false;
-      Object.keys(form.value).forEach(
-        (k) => (form.value[k] = typeof form.value[k] === "boolean" ? false : "")
-      );
-    }, 1700);
-  } catch (e) {
-    // Option: afficher une erreur, pas indispensable si déjà catché ailleurs
-  }
+  await new Promise((r) => setTimeout(r, 900));
+  done.value = true;
   loading.value = false;
+  emit("submitted", result);
+  setTimeout(() => {
+    close();
+    done.value = false;
+    form.value = {
+      role: "",
+      roleOther: "",
+      sector: "",
+      sectorOther: "",
+      audience: "",
+      audienceOther: "",
+      revenue: "",
+      revenueOther: "",
+      process: "",
+      processOther: "",
+      discovery: "",
+      discoveryOther: "",
+      challenge: "",
+      beta: false,
+    };
+  }, 1700);
 };
 </script>
 
