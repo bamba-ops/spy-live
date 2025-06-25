@@ -158,8 +158,8 @@ const submitForm = async () => {
       }
     } else {
       success.value = true;
-      email.value = "";
       showModal.value = true;
+      email.value = "";
     }
   } catch (e) {
     error.value = "Erreur, réessaie.";
