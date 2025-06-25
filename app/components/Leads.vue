@@ -129,7 +129,7 @@
       class="absolute bottom-0 right-0 w-72 h-72 bg-blue-100 rounded-full opacity-30 blur-2xl pointer-events-none"
     ></div>
   </section>
-  <Form @submitted="..." :email="savedEmail" v-model="showModal" />
+  <Form :email="savedEmail" v-model="showModal" />
 </template>
 
 <script setup>
