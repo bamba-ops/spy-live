@@ -358,6 +358,7 @@
 <script setup>
 import { nextTick, ref } from "vue";
 import { createClient } from "@supabase/supabase-js";
+import { data } from "autoprefixer";
 
 const config = useRuntimeConfig();
 const supabase = createClient(
@@ -470,13 +471,15 @@ const submit = async () => {
   try {
     // Envoi vers Supabase (table "leads")
     console.log(props.email);
-    const { error: supaError } = await supabase
+    const { data: error: supaError } = await supabase
       .from("leads")
       .update(toSend)
-      .eq("email", props.email);
+      .eq("email", props.email)
+      .select();
     if (supaError) {
       console.log(supaError.message);
     } else {
+      console.log(data)
       done.value = true;
       await nextTick();
       // Scroll vers le feedback
