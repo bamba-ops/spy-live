@@ -10,14 +10,14 @@
         Problème
       </span>
 
-      <!-- Emoji dans cercle dégradé subtil -->
+      <!-- Emoji mood -->
       <div
         class="h-16 w-16 rounded-full flex items-center justify-center bg-gradient-to-br from-[#ff5a5f]/10 via-[#00a699]/10 to-teal-100"
       >
         <span class="text-3xl">😕</span>
       </div>
 
-      <!-- Titre -->
+      <!-- Pain headline -->
       <h2
         class="text-2xl md:text-3xl font-bold text-[#484848] text-center leading-snug"
       >
@@ -25,43 +25,40 @@
         mais quittent le live.
       </h2>
 
-      <!-- Liste icônes -->
+      <!-- Data bullets -->
       <ul
         class="space-y-4 text-base md:text-lg text-[#484848] leading-relaxed text-left w-full max-w-sm mx-auto"
       >
         <li class="flex gap-3">
-          <svg
-            class="w-5 h-5 flex-shrink-0 text-[#ff5a5f]"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
+          <svg class="w-5 h-5 flex-shrink-0 text-[#ff5a5f]" fill="currentColor">
             <circle cx="10" cy="10" r="10" />
           </svg>
-          <span>Ils ferment la vidéo pour trouver ton site.</span>
+          <span
+            ><strong>70 %</strong> des paniers sont abandonnés dès que
+            l’acheteur doit ouvrir ton site.</span
+          >
         </li>
         <li class="flex gap-3">
-          <svg
-            class="w-5 h-5 flex-shrink-0 text-[#ff5a5f]"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
+          <svg class="w-5 h-5 flex-shrink-0 text-[#ff5a5f]" fill="currentColor">
             <circle cx="10" cy="10" r="10" />
           </svg>
-          <span>Ils cherchent le produit, la taille, la couleur…</span>
+          <span
+            >Un checkout moyen compte <strong>5&nbsp;étapes</strong>; chaque
+            clic en trop peut coûter <strong>-35 % de conversion</strong>.</span
+          >
         </li>
         <li class="flex gap-3">
-          <svg
-            class="w-5 h-5 flex-shrink-0 text-[#ff5a5f]"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
+          <svg class="w-5 h-5 flex-shrink-0 text-[#ff5a5f]" fill="currentColor">
             <circle cx="10" cy="10" r="10" />
           </svg>
-          <span>Et abandonnent le panier avant de payer.</span>
+          <span
+            >Ces abandons pèsent <strong>18 Mds $</strong> de ventes perdues
+            chaque année dans l’e-commerce.</span
+          >
         </li>
       </ul>
 
-      <!-- Décoration fine -->
+      <!-- Tiny separator -->
       <span class="block h-0.5 w-14 bg-gray-200 rounded-full"></span>
     </div>
   </section>
