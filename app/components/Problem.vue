@@ -1,57 +1,38 @@
 <template>
-  <section
-    class="bg-[#f7f7f8] py-14 md:py-20 px-4 flex items-center justify-center"
-  >
-    <div class="max-w-2xl w-full mx-auto">
-      <div
-        class="bg-white rounded-3xl shadow-sm px-6 py-10 md:px-12 md:py-14 flex flex-col items-center space-y-8"
+  <section class="bg-[#f7f7f8] py-16 px-4 flex justify-center">
+    <div
+      class="bg-white rounded-3xl shadow-md max-w-xl w-full p-8 text-center flex flex-col items-center space-y-6"
+    >
+      <!-- Label discret -->
+      <span
+        class="text-xs uppercase font-semibold text-pink-600 bg-pink-100 px-2 py-1 rounded-full"
       >
-        <!-- Badge mini-headline -->
-        <div class="mb-2">
-          <span
-            class="bg-pink-100 text-pink-600 text-xs font-semibold px-3 py-1 rounded-full tracking-wide uppercase"
-            >Problème</span
-          >
-        </div>
-        <!-- Emoji dans cercle doux -->
-        <span
-          class="inline-flex items-center justify-center bg-gradient-to-br from-pink-100 via-blue-100 to-teal-100 rounded-full h-16 w-16 shadow-sm"
-        >
-          <span class="text-4xl">😶‍🌫️</span>
-        </span>
-        <!-- Titre -->
-        <h2
-          class="text-2xl md:text-3xl font-bold text-gray-900 text-center leading-tight"
-        >
-          Le client veut acheter.<br />Mais le parcours est trop long.
-        </h2>
-        <!-- Texte principal -->
-        <div class="space-y-5">
-          <p
-            class="text-base md:text-lg text-gray-700 text-center leading-relaxed"
-          >
-            Sur le live, tout est fluide. Mais dès qu’un client veut commander,
-            la magie s’arrête.
-          </p>
-          <p
-            class="text-base md:text-lg text-gray-700 text-center leading-relaxed"
-          >
-            Il doit quitter le live, retrouver ton site, faire défiler les
-            pages, sélectionner la bonne couleur, la taille, valider le panier…
-            souvent, il abandonne avant la fin.
-          </p>
-          <p
-            class="text-base md:text-lg text-gray-700 text-center leading-relaxed"
-          >
-            Chaque étape, c’est une occasion de perdre une vente. Et toi, tu ne
-            peux qu’attendre… en espérant qu’il revienne.
-          </p>
-        </div>
-        <!-- Ligne grise déco -->
-        <div class="flex justify-center pt-4">
-          <span class="block h-1 w-16 rounded-full bg-gray-200"></span>
-        </div>
+        Problème
+      </span>
+
+      <!-- Emoji stylé -->
+      <div
+        class="bg-gradient-to-br from-pink-100 via-blue-100 to-teal-100 rounded-full h-14 w-14 flex items-center justify-center"
+      >
+        <span class="text-3xl">😑</span>
       </div>
+
+      <!-- Titre clair et puissant -->
+      <h2 class="text-xl md:text-2xl font-bold text-gray-900 leading-tight">
+        Ils veulent acheter… mais quittent le live.
+      </h2>
+
+      <!-- 3 bullets pour une friction claire -->
+      <ul
+        class="text-base text-gray-700 space-y-2 list-disc list-inside leading-relaxed"
+      >
+        <li>Sortent du live</li>
+        <li>Cherchent ton produit sur ton site</li>
+        <li>Abandonnent le panier en chemin</li>
+      </ul>
+
+      <!-- Ligne légère déco -->
+      <span class="block h-0.5 w-12 bg-gray-200 rounded-full mt-2"></span>
     </div>
   </section>
 </template>
