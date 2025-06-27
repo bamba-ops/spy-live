@@ -3,6 +3,7 @@
 <template>
   <div>
     <Hero />
+    <Problem />
     <Features />
     <Leads />
     <FAQ />
