@@ -49,35 +49,30 @@
 
       <!-- HEADLINE XXL -->
       <h1
-        class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight mb-6 drop-shadow-lg"
+        class="text-3xl md:text-5xl font-bold text-gray-900 leading-snug tracking-tight mb-6"
       >
-        Un commentaire&nbsp;→&nbsp;paiement immédiat
+        Un commentaire → paiement immédiat
       </h1>
-
-      <!-- Sous-texte bénéfice -->
       <p
-        class="text-lg md:text-2xl text-gray-700 font-medium mb-10 max-w-xl mx-auto"
+        class="text-base md:text-xl text-gray-600 font-normal mb-10 max-w-lg mx-auto leading-relaxed"
       >
-        SpyLive détecte la commande dans ton live TikTok
+        SpyLive détecte la commande sur ton live TikTok
         <br class="hidden md:inline" />
-        et génère le lien de paiement en <strong>1&nbsp;seconde</strong>.
+        et génère le lien de paiement en
+        <span class="font-semibold text-gray-800">1 seconde</span>.
         <br class="hidden md:inline" />
-        <span class="text-pink-500"
+        <span class="text-pink-500 font-semibold"
           >Zéro clic pour toi, zéro friction pour lui.</span
         >
       </p>
-
-      <!-- Bouton principal, gros, responsive -->
       <button
         @click="scrollToLeads"
-        class="bg-pink-500 hover:bg-pink-600 text-white text-lg md:text-xl font-bold px-8 py-4 rounded-2xl shadow-xl transition active:scale-95 w-full max-w-xs"
+        class="bg-pink-500 hover:bg-pink-600 text-white text-base md:text-lg font-semibold px-7 py-3 rounded-xl transition duration-200 active:scale-95 w-full max-w-xs shadow-none"
       >
         🚀 Rejoins la beta privée
       </button>
-
-      <!-- Social proof -->
       <div
-        class="mt-8 flex items-center justify-center gap-2 text-gray-400 text-base"
+        class="mt-8 flex items-center justify-center gap-2 text-gray-400 text-sm"
       >
         <span class="relative flex h-3 w-3">
           <span
@@ -87,7 +82,7 @@
             class="relative inline-flex rounded-full h-3 w-3 bg-pink-500"
           ></span>
         </span>
-        <span
+        <span class="tracking-normal"
           >{{ leadsCount + 7 }} créateurs encaissent déjà sans friction</span
         >
       </div>
