@@ -46,26 +46,35 @@
           </span>
         </div>
       </div>
+
       <!-- HEADLINE XXL -->
       <h1
         class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight mb-6 drop-shadow-lg"
       >
-        Vends en live avant même d’avoir un site
+        Un commentaire&nbsp;→&nbsp;paiement immédiat
       </h1>
+
       <!-- Sous-texte bénéfice -->
       <p
         class="text-lg md:text-2xl text-gray-700 font-medium mb-10 max-w-xl mx-auto"
       >
-        Automatise tes paiements sur TikTok Live.<br class="hidden md:inline" />
-        <span class="text-pink-500">Gagne du temps, booste tes ventes.</span>
+        SpyLive détecte la commande dans ton live TikTok
+        <br class="hidden md:inline" />
+        et génère le lien de paiement en <strong>1&nbsp;seconde</strong>.
+        <br class="hidden md:inline" />
+        <span class="text-pink-500"
+          >Zéro clic pour toi, zéro friction pour lui.</span
+        >
       </p>
+
       <!-- Bouton principal, gros, responsive -->
       <button
         @click="scrollToLeads"
         class="bg-pink-500 hover:bg-pink-600 text-white text-lg md:text-xl font-bold px-8 py-4 rounded-2xl shadow-xl transition active:scale-95 w-full max-w-xs"
       >
-        🚀 Rejoindre l'accès beta
+        🚀 Rejoins la beta privée
       </button>
+
       <!-- Social proof -->
       <div
         class="mt-8 flex items-center justify-center gap-2 text-gray-400 text-base"
@@ -78,9 +87,12 @@
             class="relative inline-flex rounded-full h-3 w-3 bg-pink-500"
           ></span>
         </span>
-        <span>{{ leadsCount + 7 }} créateurs rejoignent déjà la solution</span>
+        <span
+          >{{ leadsCount + 7 }} créateurs encaissent déjà sans friction</span
+        >
       </div>
     </div>
+
     <!-- Déco bulle façon airbnb moderne -->
     <div
       class="absolute -top-20 -left-32 w-80 h-80 bg-pink-100 rounded-full opacity-30 blur-2xl"
