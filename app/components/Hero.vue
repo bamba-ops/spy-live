@@ -1,6 +1,6 @@
 <template>
   <section
-    class="relative min-h-[120vh] flex items-center justify-center bg-gradient-to-tr from-pink-50 via-blue-50 to-teal-50 px-4 font-sans overflow-hidden"
+    class="relative min-h-[110vh] flex items-center justify-center bg-gradient-to-tr from-pink-50 via-blue-50 to-teal-50 px-4 font-sans overflow-hidden"
   >
     <div
       class="flex flex-col items-center text-center w-full max-w-2xl mx-auto z-10 pt-10 pb-16"
