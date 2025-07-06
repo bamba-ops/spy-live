@@ -66,41 +66,66 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
+import { useHead } from "#head";
 
 const faqs = [
   {
-    q: "Ai-je besoin d’un site pour vendre en live avec SpyLive ?",
+    q: "Ai-je besoin d’un site pour vendre en live avec SpyLive ?",
     a: "Non, SpyLive te permet de vendre directement en live sur TikTok, sans site e-commerce ni intégration technique. Tout se passe dans un seul dashboard, simple et rapide.",
   },
   {
-    q: "Comment mes clients accèdent-ils à leur panier pendant le live ?",
+    q: "Comment mes clients accèdent-ils à leur panier pendant le live ?",
     a: "Il suffit de leur demander de cliquer sur le lien dans ta bio TikTok. Ils entrent simplement leur pseudo TikTok, et retrouvent instantanément leur panier prêt à payer.",
   },
   {
-    q: "SpyLive fonctionne-t-il avec d’autres plateformes que TikTok ?",
+    q: "SpyLive fonctionne-t-il avec d’autres plateformes que TikTok ?",
     a: "Aujourd’hui, SpyLive est optimisé pour TikTok Live. Nous prévoyons prochainement l’ouverture à Instagram Live et YouTube.",
   },
   {
-    q: "Est-ce que je peux personnaliser le panier ou le lien pour mes clients ?",
-    a: "Oui, tu contrôles à tout moment le contenu du panier pour chaque acheteur depuis ton dashboard. Le lien en bio ne change pas : c’est l’expérience la plus simple possible pour tes viewers.",
+    q: "Est-ce que je peux personnaliser le panier ou le lien pour mes clients ?",
+    a: "Oui, tu contrôles à tout moment le contenu du panier pour chaque acheteur depuis ton dashboard. Le lien en bio ne change pas : c’est l’expérience la plus simple possible pour tes viewers.",
   },
   {
-    q: "Mes ventes sont-elles instantanément créditées ?",
+    q: "Mes ventes sont-elles instantanément créditées ?",
     a: "Oui, tu vois tes ventes en temps réel dans ton dashboard, et chaque transaction s’affiche dès que le paiement est validé.",
   },
+  // Les questions 6 & 7 restent dans le tableau mais ne seront pas incluses dans le JSON-LD
   {
-    q: "SpyLive est-il compatible avec Shopify ou d’autres CMS ?",
+    q: "SpyLive est-il compatible avec Shopify ou d’autres CMS ?",
     a: "Prochainement, tu pourras connecter ton CMS (Shopify, WooCommerce, etc.) à SpyLive pour une synchronisation totale. Pour l’instant, SpyLive fonctionne en autonomie, sans boutique nécessaire.",
   },
   {
-    q: "Comment rejoindre la bêta ?",
-    a: "Il suffit de laisser ton email sur la page d’accueil. Tu recevras un accès prioritaire dès l’ouverture officielle !",
+    q: "Comment rejoindre la bêta ?",
+    a: "Il suffit de laisser ton email sur la page d’accueil. Tu recevras un accès prioritaire dès l’ouverture officielle !",
   },
 ];
 
-const opened = ref(null);
+const opened = ref<number | null>(null);
+
+// --- JSON-LD pour 5 FAQ ---
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.slice(0, 5).map(({ q, a }) => ({
+    "@type": "Question",
+    name: q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: a,
+    },
+  })),
+};
+
+useHead({
+  script: [
+    {
+      type: "application/ld+json",
+      children: JSON.stringify(faqJsonLd, null, 2),
+    },
+  ],
+});
 </script>
 
 <style scoped>

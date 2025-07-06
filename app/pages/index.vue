@@ -10,24 +10,26 @@ import { useSeoMeta } from "@unhead/vue";
 // Meta SEO classique
 useSeoMeta({
   /* ---- Métas génériques ---- */
-  title:       'TikTok Live → Shopify en 1 clic | SpyLive',
-  description: 'SpyLive crée le panier Shopify de ton viewer TikTok Live en temps réel. Découvre le plugin gratuit !',
+  title: "TikTok Live → Shopify en 1 clic | SpyLive",
+  description:
+    "SpyLive crée le panier Shopify de ton viewer TikTok Live en temps réel. Découvre le plugin gratuit !",
 
   /* ---- Open Graph ---- */
-  ogTitle:       'TikTok Live → Shopify en 1 clic',
-  ogDescription: 'Crée automatiquement le panier Shopify quand un viewer commente 🛒',
-  ogImage:       'https://spylive.shop/og.webp',
-  ogUrl:         'https://spylive.shop/',
-  ogType:        'website',
+  ogTitle: "TikTok Live → Shopify en 1 clic",
+  ogDescription:
+    "Crée automatiquement le panier Shopify quand un viewer commente 🛒",
+  ogImage: "https://spylive.shop/og.webp",
+  ogUrl: "https://spylive.shop/",
+  ogType: "website",
 
   /* ---- Twitter Card ---- */
-  twitterCard:        'summary_large_image',
-  twitterSite:        '@bambalerequin',
-  twitterCreator:     '@tonCompte',
-  twitterTitle:       'TikTok Live → Shopify en 1 clic',
-  twitterDescription: 'SpyLive transforme les commentaires en paniers Shopify.',
-  twitterImage:       'https://ton-domaine.com/og.webp',
-})
+  twitterCard: "summary_large_image",
+  twitterSite: "@bambalerequin",
+  twitterCreator: "@bambalerequin",
+  twitterTitle: "TikTok Live → Shopify en 1 clic",
+  twitterDescription: "SpyLive transforme les commentaires en paniers Shopify.",
+  twitterImage: "https://spylive.shop/og.webp",
+});
 
 // Schema.org pour un FAQPage
 useSchemaOrg([
