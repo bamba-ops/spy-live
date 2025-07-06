@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   // https://nuxt.com/modules
-  modules: ['@nuxthub/core', '@nuxt/eslint', '@nuxtjs/tailwindcss'],
+  modules: ['@nuxthub/core', '@nuxt/eslint', '@nuxtjs/tailwindcss', '@nuxtjs/robots', '@nuxtjs/sitemap', 'nuxt-schema-org'],
 
   ssr: true,
 

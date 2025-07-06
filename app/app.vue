@@ -3,7 +3,7 @@
 useSeoMeta({
   titleTemplate: "%s · SpyLive",
   ogSiteName: "SpyLive",
-  twitterSite: "@spylive_app",
+  tiktokSite: "@bambalerequin",
   robots: "index,follow",
 });
 </script>
