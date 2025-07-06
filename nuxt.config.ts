@@ -3,6 +3,8 @@ export default defineNuxtConfig({
   // https://nuxt.com/modules
   modules: ['@nuxthub/core', '@nuxt/eslint', '@nuxtjs/tailwindcss'],
 
+  ssr: true,
+
   // https://devtools.nuxt.com
   devtools: { enabled: true },
 
@@ -30,5 +32,15 @@ export default defineNuxtConfig({
         commaDangle: 'never'
       }
     }
+  },
+  robots: {
+    UserAgent: '*',
+    Disallow: ['/'] // on bloque jusqu’au lancement
+  },
+
+  sitemap: {
+    hostname: 'https://spylive.shop', // remplace par ton domaine
+    gzip: true,
+    routes: [] // tu pourras y ajouter tes slugs plus tard
   }
 })
