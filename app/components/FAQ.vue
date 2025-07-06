@@ -68,7 +68,6 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { useHead } from "#head";
 
 const faqs = [
   {
@@ -91,7 +90,7 @@ const faqs = [
     q: "Mes ventes sont-elles instantanément créditées ?",
     a: "Oui, tu vois tes ventes en temps réel dans ton dashboard, et chaque transaction s’affiche dès que le paiement est validé.",
   },
-  // Les questions 6 & 7 restent dans le tableau mais ne seront pas incluses dans le JSON-LD
+  // questions 6 & 7 restent dans le tableau mais ne seront pas indexées en JSON-LD
   {
     q: "SpyLive est-il compatible avec Shopify ou d’autres CMS ?",
     a: "Prochainement, tu pourras connecter ton CMS (Shopify, WooCommerce, etc.) à SpyLive pour une synchronisation totale. Pour l’instant, SpyLive fonctionne en autonomie, sans boutique nécessaire.",
@@ -104,7 +103,7 @@ const faqs = [
 
 const opened = ref<number | null>(null);
 
-// --- JSON-LD pour 5 FAQ ---
+// --- Génération du JSON-LD FAQPage pour les 5 premières questions ---
 const faqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -118,6 +117,7 @@ const faqJsonLd = {
   })),
 };
 
+// Injection dans le <head>
 useHead({
   script: [
     {
