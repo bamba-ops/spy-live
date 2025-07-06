@@ -1,3 +1,6 @@
+import { cities } from './app/utils/dataset'
+
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   // https://nuxt.com/modules
@@ -41,6 +44,6 @@ export default defineNuxtConfig({
   sitemap: {
     hostname: 'https://spylive.shop', // remplace par ton domaine
     gzip: true,
-    routes: [] // tu pourras y ajouter tes slugs plus tard
+    routes: cities.map(c => `/live-shopping/${c.slug}`) // tu pourras y ajouter tes slugs plus tard
   }
 })
