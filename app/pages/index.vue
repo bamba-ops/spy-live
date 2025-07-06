@@ -9,11 +9,25 @@ import { useSeoMeta } from "@unhead/vue";
 
 // Meta SEO classique
 useSeoMeta({
-  title: "TikTok Live ➜ Shopify en 1 s",
-  description: "SpyLive crée le panier Shopify dès que ton viewer commente buy",
-  canonical: `https://spylive.shop${useRoute().path}`,
-  hreflang: "fr",
-});
+  /* ---- Métas génériques ---- */
+  title:       'TikTok Live → Shopify en 1 clic | SpyLive',
+  description: 'SpyLive crée le panier Shopify de ton viewer TikTok Live en temps réel. Découvre le plugin gratuit !',
+
+  /* ---- Open Graph ---- */
+  ogTitle:       'TikTok Live → Shopify en 1 clic',
+  ogDescription: 'Crée automatiquement le panier Shopify quand un viewer commente 🛒',
+  ogImage:       'https://spylive.shop/og.webp',
+  ogUrl:         'https://spylive.shop/',
+  ogType:        'website',
+
+  /* ---- Twitter Card ---- */
+  twitterCard:        'summary_large_image',
+  twitterSite:        '@bambalerequin',
+  twitterCreator:     '@tonCompte',
+  twitterTitle:       'TikTok Live → Shopify en 1 clic',
+  twitterDescription: 'SpyLive transforme les commentaires en paniers Shopify.',
+  twitterImage:       'https://ton-domaine.com/og.webp',
+})
 
 // Schema.org pour un FAQPage
 useSchemaOrg([
